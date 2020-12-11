@@ -17,6 +17,9 @@ module.exports = {
       usia: {
         type: Sequelize.INTEGER
       },
+      jenis_kelamin: {
+        type: Sequelize.STRING
+      },
       username: {
         type: Sequelize.STRING
       },

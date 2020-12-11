@@ -14,6 +14,9 @@ module.exports = {
       tanggal_lahir: {
         type: Sequelize.DATE
       },
+      jenis_kelamin: {
+        type: Sequelize.STRING
+      },
       lingkar_kepala: {
         type: Sequelize.INTEGER
       },

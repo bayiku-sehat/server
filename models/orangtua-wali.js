@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Orangtua_Wali.hasMany(models.Bayi, {
         sourceKey: 'id',
+        foreignKey: 'OrangTua_Wali_id'
         
       })
     }
@@ -21,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     nama: DataTypes.STRING,
     alamat: DataTypes.STRING,
     usia: DataTypes.INTEGER,
+    jenis_kelamin: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     no_hp: DataTypes.INTEGER
@@ -28,5 +30,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Orangtua-Wali',
   });
-  return Orangtua - Wali;
+  return Orangtua_Wali;
 };

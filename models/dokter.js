@@ -11,12 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Dokter.hasMany(models.Bayi, {
+        sourceKey: 'id',
+        foreignKey: 'Dokter_id'
+      })
     }
   };
   Dokter.init({
     nama: DataTypes.STRING,
     alamat: DataTypes.STRING,
     usia: DataTypes.INTEGER,
+    jenis_kelamin: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     no_hp: DataTypes.INTEGER,

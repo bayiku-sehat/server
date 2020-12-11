@@ -11,12 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Petugas.hasMany(models.Bayi, {
+        sourceKey: 'id',
+        foreignKey: 'Petugas_id'
+      })
     }
   };
   Petugas.init({
     nama: DataTypes.STRING,
     alamat: DataTypes.STRING,
     usia: DataTypes.INTEGER,
+    jenis_kelamin: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     no_hp: DataTypes.INTEGER,

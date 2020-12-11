@@ -1,35 +1,38 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Dokters', {
+    await queryInterface.createTable('BeratBadans', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nama: {
-        type: Sequelize.STRING
-      },
-      alamat: {
-        type: Sequelize.STRING
-      },
-      usia: {
+      bulan: {
         type: Sequelize.INTEGER
       },
-      jenis_kelamin: {
-        type: Sequelize.STRING
+      sd_n3: {
+        type: Sequelize.DECIMAL
       },
-      username: {
-        type: Sequelize.STRING
+      sd_n2: {
+        type: Sequelize.DECIMAL
       },
-      password: {
-        type: Sequelize.STRING
+      sd_n1: {
+        type: Sequelize.DECIMAL
       },
-      no_hp: {
-        type: Sequelize.INTEGER
+      median: {
+        type: Sequelize.DECIMAL
       },
-      spesialisasi: {
+      sd_1: {
+        type: Sequelize.DECIMAL
+      },
+      sd_2: {
+        type: Sequelize.DECIMAL
+      },
+      sd_3: {
+        type: Sequelize.DECIMAL
+      },
+      jenisKelamin: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -43,6 +46,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Dokters');
+    await queryInterface.dropTable('BeratBadans');
   }
 };
