@@ -4,6 +4,7 @@ const BayiController = require('../controllers/BayiController')
 const OrangTuaController = require('../controllers/OrangTuaController')
 const PetugasController = require('../controllers/PetugasController')
 const PerkembanganController = require('../controllers/PerkembanganController')
+const DokterController = require('../controllers/DokterController')
 
 const router = require('express').Router()
 
@@ -26,6 +27,11 @@ router.get('/petugas', PetugasController.show)
 router.post('/petugas', PetugasController.add)
 router.put('/petugas/:petugas_id', PetugasController.editPetugas)
 router.delete('/petugas/:petugas_id', PetugasController.deletePetugas)
+
+router.get('/dokter', DokterController.show)
+router.post('/dokter', DokterController.add)
+router.put('/dokter/:dokter_id', DokterController.editDokter)
+router.delete('/dokter/:dokter_id', DokterController.deleteDokter)
 
 
 module.exports = router
