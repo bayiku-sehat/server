@@ -4,7 +4,7 @@ const { Bayi, TinggiBadan, BeratBadan, LingkarKepala } = require('../models/inde
 class BayiController {
   static async show(req, res, next) {
     try {
-      const data = await Bayi.findAll({ include: ['Orangtua_Wali'] })
+      const data = await Bayi.findAll({ include: ['Orangtua_Wali', "Dokters"] })
       res.status(200).json(data)
     } catch (error) {
       next(error)
@@ -32,6 +32,7 @@ class BayiController {
         lingkar_kepala: +req.body.lingkar_kepala,
         tinggi: +req.body.tinggi_badan,
         berat_badan: +req.body.berat_badan,
+        catatan: req.body.catatan,
         Dokter_id: 1,
         Petugas_id: 1,
         OrangTua_Wali_id: 1
@@ -56,49 +57,49 @@ class BayiController {
         }
       })
       if (params.tinggi < whoTinggiBadan.sd_1 && params.tinggi > whoTinggiBadan.sd_n1) {
-        params.status = 'Tinggi badan Normal, '
+        params.status_tinggi = 0
       } else if (params.tinggi >= whoTinggiBadan.sd_1 && params.tinggi < whoTinggiBadan.sd_2) {
-        params.status = 'Tinggi Badan sedikit berlebih, '
+        params.status_tinggi = 1
       } else if (params.tinggi >= whoTinggiBadan.sd_2 && params.tinggi < whoTinggiBadan.sd_3) {
-        params.status = 'Tinggi badan berlebih, '
+        params.status_tinggi = 2
       } else if (params.tinggi >= whoTinggiBadan.sd_3) {
-        params.status = 'Tinggi badan sangat berlebih, '
+        params.status_tinggi = 3
       } else if (params.tinggi <= whoTinggiBadan.sd_n1 && params.tinggi > whoTinggiBadan.sd_n2) {
-        params.status = 'Tinggi badan sedikit kurang, '
+        params.status_tinggi = -1
       } else if (params.tinggi <= whoTinggiBadan.sd_n2 && params.tinggi >= whoTinggiBadan.sd_n3) {
-        params.status = 'Tinggi badan kurang, '
+        params.status_tinggi = -2
       } else if (params.tinggi < whoTinggiBadan.sd_n3) {
-        params.status = 'tinggi badan sangat kurang, '
+        params.status_tinggi = -3
       }
       if (params.berat_badan < whoBeratBadan.sd_1 && params.berat_badan > whoBeratBadan.sd_n1) {
-        params.status += 'berat badan normal, '
+        params.status_berat_badan = 0
       } else if (params.berat_badan >= whoBeratBadan.sd_1 && params.berat_badan < whoBeratBadan.sd_2) {
-        params.status += 'berat badan berlebih sedikit, '
+        params.status_berat_badan = 1
       } else if (params.berat_badan >= whoBeratBadan.sd_2 && params.berat_badan < whoBeratBadan.sd_3) {
-        params.status += 'berat badan berlebih, '
+        params.status_berat_badan = 2
       } else if (params.berat_badan >= whoBeratBadan.sd_3) {
-        params.status += 'berat badan sangat berlebih, '
+        params.status_berat_badan = 3
       } else if (params.berat_badan <= whoBeratBadan.sd_n1 && params.berat_badan > whoBeratBadan.sd_n2) {
-        params.status += 'berat badan kurang sedikit, '
+        params.status_berat_badan = -1
       } else if (params.berat_badan <= whoBeratBadan.sd_n2 && params.berat_badan >= whoBeratBadan.sd_n3) {
-        params.status += 'berat badan kurang, '
+        params.status_berat_badan = -2
       } else if (params.berat_badan < whoBeratBadan.sd_n3) {
-        params.status += 'berat badan sangat kurang, '
+        params.status_berat_badan = -3
       }
       if (params.lingkar_kepala < whoLingkarKepala.sd_1 && params.lingkar_kepala > whoLingkarKepala.sd_n1) {
-        params.status += 'lingkar kepala normal.'
+        params.status_lingkar_kepala = 0
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_1 && params.lingkar_kepala < whoLingkarKepala.sd_2) {
-        params.status += 'lingkar kepala berlebih sedikit.'
+        params.status_lingkar_kepala = 1
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_2 && params.lingkar_kepala < whoLingkarKepala.sd_3) {
-        params.status += 'lingkar kepala berlebih.'
+        params.status_lingkar_kepala = 2
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_3) {
-        params.status += 'lingkar kepala sangat berlebih.'
+        params.status_lingkar_kepala = 3
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n1 && params.lingkar_kepala > whoLingkarKepala.sd_n2) {
-        params.status += 'lingkar kepala kurang sedikit.'
+        params.status_lingkar_kepala = -1
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n2 && params.lingkar_kepala >= whoLingkarKepala.sd_n3) {
-        params.status += 'lingkar kepala kurang.'
+        params.status_lingkar_kepala = -2
       } else if (params.lingkar_kepala < whoLingkarKepala.sd_n3) {
-        params.status += 'lingkar kepala sangat kurang.'
+        params.status_lingkar_kepala = -3
       }
       const data = await Bayi.create(params)
       res.status(201).json(data)
@@ -115,6 +116,7 @@ class BayiController {
         lingkar_kepala: +req.body.lingkar_kepala,
         tinggi: +req.body.tinggi_badan,
         berat_badan: +req.body.berat_badan,
+        catatan: req.body.catatan,
         Dokter_id: 1,
         Petugas_id: 1,
         OrangTua_Wali_id: req.body.OrangTua_Wali_id
@@ -139,49 +141,49 @@ class BayiController {
         }
       })
       if (params.tinggi < whoTinggiBadan.sd_1 && params.tinggi > whoTinggiBadan.sd_n1) {
-        params.status = 'Tinggi badan Normal, '
+        params.status_tinggi = 0
       } else if (params.tinggi >= whoTinggiBadan.sd_1 && params.tinggi < whoTinggiBadan.sd_2) {
-        params.status = 'Tinggi Badan sedikit berlebih, '
+        params.status_tinggi = 1
       } else if (params.tinggi >= whoTinggiBadan.sd_2 && params.tinggi < whoTinggiBadan.sd_3) {
-        params.status = 'Tinggi badan berlebih, '
+        params.status_tinggi = 2
       } else if (params.tinggi >= whoTinggiBadan.sd_3) {
-        params.status = 'Tinggi badan sangat berlebih, '
+        params.status_tinggi = 3
       } else if (params.tinggi <= whoTinggiBadan.sd_n1 && params.tinggi > whoTinggiBadan.sd_n2) {
-        params.status = 'Tinggi badan sedikit kurang, '
+        params.status_tinggi = -1
       } else if (params.tinggi <= whoTinggiBadan.sd_n2 && params.tinggi >= whoTinggiBadan.sd_n3) {
-        params.status = 'Tinggi badan kurang, '
+        params.status_tinggi = -2
       } else if (params.tinggi < whoTinggiBadan.sd_n3) {
-        params.status = 'tinggi badan sangat kurang, '
+        params.status_tinggi = -3
       }
       if (params.berat_badan < whoBeratBadan.sd_1 && params.berat_badan > whoBeratBadan.sd_n1) {
-        params.status += 'berat badan normal, '
+        params.status_berat_badan = 0
       } else if (params.berat_badan >= whoBeratBadan.sd_1 && params.berat_badan < whoBeratBadan.sd_2) {
-        params.status += 'berat badan berlebih sedikit, '
+        params.status_berat_badan = 1
       } else if (params.berat_badan >= whoBeratBadan.sd_2 && params.berat_badan < whoBeratBadan.sd_3) {
-        params.status += 'berat badan berlebih, '
+        params.status_berat_badan = 2
       } else if (params.berat_badan >= whoBeratBadan.sd_3) {
-        params.status += 'berat badan sangat berlebih, '
+        params.status_berat_badan = 3
       } else if (params.berat_badan <= whoBeratBadan.sd_n1 && params.berat_badan > whoBeratBadan.sd_n2) {
-        params.status += 'berat badan kurang sedikit, '
+        params.status_berat_badan = -1
       } else if (params.berat_badan <= whoBeratBadan.sd_n2 && params.berat_badan >= whoBeratBadan.sd_n3) {
-        params.status += 'berat badan kurang, '
+        params.status_berat_badan = -2
       } else if (params.berat_badan < whoBeratBadan.sd_n3) {
-        params.status += 'berat badan sangat kurang, '
+        params.status_berat_badan = -3
       }
       if (params.lingkar_kepala < whoLingkarKepala.sd_1 && params.lingkar_kepala > whoLingkarKepala.sd_n1) {
-        params.status += 'lingkar kepala normal.'
+        params.status_lingkar_kepala = 0
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_1 && params.lingkar_kepala < whoLingkarKepala.sd_2) {
-        params.status += 'lingkar kepala berlebih sedikit.'
+        params.status_lingkar_kepala = 1
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_2 && params.lingkar_kepala < whoLingkarKepala.sd_3) {
-        params.status += 'lingkar kepala berlebih.'
+        params.status_lingkar_kepala = 2
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_3) {
-        params.status += 'lingkar kepala sangat berlebih.'
+        params.status_lingkar_kepala = 3
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n1 && params.lingkar_kepala > whoLingkarKepala.sd_n2) {
-        params.status += 'lingkar kepala kurang sedikit.'
+        params.status_lingkar_kepala = -1
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n2 && params.lingkar_kepala >= whoLingkarKepala.sd_n3) {
-        params.status += 'lingkar kepala kurang.'
+        params.status_lingkar_kepala = -2
       } else if (params.lingkar_kepala < whoLingkarKepala.sd_n3) {
-        params.status += 'lingkar kepala sangat kurang.'
+        params.status_lingkar_kepala = -3
       }
       const data = await Bayi.update(params, {
         where: {

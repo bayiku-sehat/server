@@ -14,12 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Perkembangan.init({
-    catatan: DataTypes.STRING,
     tanggal_pemeriksaan: DataTypes.DATE,
     lingkar_kepala: DataTypes.DECIMAL,
     tinggi: DataTypes.DECIMAL,
     berat_badan: DataTypes.DECIMAL,
-    status: DataTypes.STRING,
+    status_lingkar_kepala: DataTypes.INTEGER,
+    status_tinggi: DataTypes.INTEGER,
+    status_berat_badan: DataTypes.INTEGER,
+    catatan: DataTypes.STRING,
     Bayi_id: DataTypes.INTEGER
   }, {
     sequelize,

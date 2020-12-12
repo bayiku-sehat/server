@@ -11,9 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Dokter.hasMany(models.Bayi, {
-        sourceKey: 'id',
-        foreignKey: 'Dokter_id'
+      Dokter.belongsToMany(models.Bayi, {
+        through: models.Pasien,
+        targetKey: 'id',
+        foreignKey: "Dokter_id"
       })
     }
   };
@@ -25,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     no_hp: DataTypes.INTEGER,
-    spesialisasi: DataTypes.STRING
+    spesialisasi: DataTypes.STRING,
+    Bayi_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Dokter',

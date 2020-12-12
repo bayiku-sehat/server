@@ -34,49 +34,49 @@ class PerkembanganController {
         }
       })
       if (params.tinggi < whoTinggiBadan.sd_1 && params.tinggi > whoTinggiBadan.sd_n1) {
-        params.status = 'Tinggi Normal, '
+        params.status_tinggi = 0
       } else if (params.tinggi >= whoTinggiBadan.sd_1 && params.tinggi < whoTinggiBadan.sd_2) {
-        params.status = 'Ketinggian dikit, '
+        params.status_tinggi = 1
       } else if (params.tinggi >= whoTinggiBadan.sd_2 && params.tinggi < whoTinggiBadan.sd_3) {
-        params.status = 'Ketinggian berlebih, '
+        params.status_tinggi = 2
       } else if (params.tinggi >= whoTinggiBadan.sd_3) {
-        params.status = 'Ketinggian berlebih sekali, '
+        params.status_tinggi = 3
       } else if (params.tinggi <= whoTinggiBadan.sd_n1 && params.tinggi > whoTinggiBadan.sd_n2) {
-        params.status = 'Ketinggian kurang dikit, '
+        params.status_tinggi = -1
       } else if (params.tinggi <= whoTinggiBadan.sd_n2 && params.tinggi >= whoTinggiBadan.sd_n3) {
-        params.status = 'Ketinggian  kurang, '
+        params.status_tinggi = -2
       } else if (params.tinggi < whoTinggiBadan.sd_n3) {
-        params.status = 'Ketinggian kurang sekali, '
+        params.status_tinggi = -3
       }
       if (params.berat_badan < whoBeratBadan.sd_1 && params.berat_badan > whoBeratBadan.sd_n1) {
-        params.status += 'Berat Normal, '
+        params.status_berat_badan = 0
       } else if (params.berat_badan >= whoBeratBadan.sd_1 && params.berat_badan < whoBeratBadan.sd_2) {
-        params.status += 'Berat berlebih dikit, '
+        params.status_berat_badan = 1
       } else if (params.berat_badan >= whoBeratBadan.sd_2 && params.berat_badan < whoBeratBadan.sd_3) {
-        params.status += 'Berat berlebih, '
+        params.status_berat_badan = 2
       } else if (params.berat_badan >= whoBeratBadan.sd_3) {
-        params.status += 'Berat berlebih sekali, '
+        params.status_berat_badan = 3
       } else if (params.berat_badan <= whoBeratBadan.sd_n1 && params.berat_badan > whoBeratBadan.sd_n2) {
-        params.status += 'Berat kurang dikit, '
+        params.status_berat_badan = -1
       } else if (params.berat_badan <= whoBeratBadan.sd_n2 && params.berat_badan >= whoBeratBadan.sd_n3) {
-        params.status += 'Berat kurang, '
+        params.status_berat_badan = -2
       } else if (params.berat_badan < whoBeratBadan.sd_n3) {
-        params.status += 'Berat kurang sekali, '
+        params.status_berat_badan = -3
       }
       if (params.lingkar_kepala < whoLingkarKepala.sd_1 && params.lingkar_kepala > whoLingkarKepala.sd_n1) {
-        params.status += 'Lingkar kepala Normal.'
+        params.status_lingkar_kepala = 0
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_1 && params.lingkar_kepala < whoLingkarKepala.sd_2) {
-        params.status += 'Lingkar kepala berlebih dikit.'
+        params.status_lingkar_kepala = 1
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_2 && params.lingkar_kepala < whoLingkarKepala.sd_3) {
-        params.status += 'Lingkar kepala berlebih.'
+        params.status_lingkar_kepala = 2
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_3) {
-        params.status += 'Lingkar kepala berlebih sekali.'
+        params.status_lingkar_kepala = 3
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n1 && params.lingkar_kepala > whoLingkarKepala.sd_n2) {
-        params.status += 'Lingkar kepala kurang dikit.'
+        params.status_lingkar_kepala = -1
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n2 && params.lingkar_kepala >= whoLingkarKepala.sd_n3) {
-        params.status += 'Lingkar kepala kurang.'
+        params.status_lingkar_kepala = -2
       } else if (params.lingkar_kepala < whoLingkarKepala.sd_n3) {
-        params.status += 'Lingkar kepala kurang sekali.'
+        params.status_lingkar_kepala = -3
       }
       const data = await Perkembangan.create(params)
       res.status(201).json(data)
@@ -116,49 +116,49 @@ class PerkembanganController {
         }
       })
       if (params.tinggi < whoTinggiBadan.sd_1 && params.tinggi > whoTinggiBadan.sd_n1) {
-        params.status = 'Tinggi Normal, '
+        params.status_tinggi = 0
       } else if (params.tinggi >= whoTinggiBadan.sd_1 && params.tinggi < whoTinggiBadan.sd_2) {
-        params.status = 'Ketinggian dikit, '
+        params.status_tinggi = 1
       } else if (params.tinggi >= whoTinggiBadan.sd_2 && params.tinggi < whoTinggiBadan.sd_3) {
-        params.status = 'Ketinggian berlebih, '
+        params.status_tinggi = 2
       } else if (params.tinggi >= whoTinggiBadan.sd_3) {
-        params.status = 'Ketinggian berlebih sekali, '
+        params.status_tinggi = 3
       } else if (params.tinggi <= whoTinggiBadan.sd_n1 && params.tinggi > whoTinggiBadan.sd_n2) {
-        params.status = 'Ketinggian kurang dikit, '
+        params.status_tinggi = -1
       } else if (params.tinggi <= whoTinggiBadan.sd_n2 && params.tinggi >= whoTinggiBadan.sd_n3) {
-        params.status = 'Ketinggian  kurang, '
+        params.status_tinggi = -2
       } else if (params.tinggi < whoTinggiBadan.sd_n3) {
-        params.status = 'Ketinggian kurang sekali, '
+        params.status_tinggi = -3
       }
       if (params.berat_badan < whoBeratBadan.sd_1 && params.berat_badan > whoBeratBadan.sd_n1) {
-        params.status += 'Berat Normal, '
+        params.status_berat_badan = 0
       } else if (params.berat_badan >= whoBeratBadan.sd_1 && params.berat_badan < whoBeratBadan.sd_2) {
-        params.status += 'Berat berlebih dikit, '
+        params.status_berat_badan = 1
       } else if (params.berat_badan >= whoBeratBadan.sd_2 && params.berat_badan < whoBeratBadan.sd_3) {
-        params.status += 'Berat berlebih, '
+        params.status_berat_badan = 2
       } else if (params.berat_badan >= whoBeratBadan.sd_3) {
-        params.status += 'Berat berlebih sekali, '
+        params.status_berat_badan = 3
       } else if (params.berat_badan <= whoBeratBadan.sd_n1 && params.berat_badan > whoBeratBadan.sd_n2) {
-        params.status += 'Berat kurang dikit, '
+        params.status_berat_badan = -1
       } else if (params.berat_badan <= whoBeratBadan.sd_n2 && params.berat_badan >= whoBeratBadan.sd_n3) {
-        params.status += 'Berat kurang, '
+        params.status_berat_badan = -2
       } else if (params.berat_badan < whoBeratBadan.sd_n3) {
-        params.status += 'Berat kurang sekali, '
+        params.status_berat_badan = -3
       }
       if (params.lingkar_kepala < whoLingkarKepala.sd_1 && params.lingkar_kepala > whoLingkarKepala.sd_n1) {
-        params.status += 'Lingkar kepala Normal.'
+        params.status_lingkar_kepala = 0
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_1 && params.lingkar_kepala < whoLingkarKepala.sd_2) {
-        params.status += 'Lingkar kepala berlebih dikit.'
+        params.status_lingkar_kepala = 1
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_2 && params.lingkar_kepala < whoLingkarKepala.sd_3) {
-        params.status += 'Lingkar kepala berlebih.'
+        params.status_lingkar_kepala = 2
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_3) {
-        params.status += 'Lingkar kepala berlebih sekali.'
+        params.status_lingkar_kepala = 3
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n1 && params.lingkar_kepala > whoLingkarKepala.sd_n2) {
-        params.status += 'Lingkar kepala kurang dikit.'
+        params.status_lingkar_kepala = -1
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n2 && params.lingkar_kepala >= whoLingkarKepala.sd_n3) {
-        params.status += 'Lingkar kepala kurang.'
+        params.status_lingkar_kepala = -2
       } else if (params.lingkar_kepala < whoLingkarKepala.sd_n3) {
-        params.status += 'Lingkar kepala kurang sekali.'
+        params.status_lingkar_kepala = -3
       }
       const data = await Perkembangan.update(params, {
         where: {

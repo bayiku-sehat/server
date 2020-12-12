@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Bayi.belongsTo(models.Dokter, {
-        targetKey: 'id',
-        foreignKey: 'Dokter_id'
-      })
       Bayi.belongsTo(models.Orangtua_Wali, {
         targetKey: 'id',
         foreignKey: 'OrangTua_Wali_id'
@@ -24,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: 'id',
         foreignKey: 'Bayi_id'
       })
+      Bayi.belongsToMany(models.Dokter, {
+        through: models.Pasien, 
+        targetKey: 'id',
+      foreignKey: 'Bayi_id'})
     }
   };
   Bayi.init({
@@ -33,7 +33,10 @@ module.exports = (sequelize, DataTypes) => {
     lingkar_kepala: DataTypes.DECIMAL,
     tinggi: DataTypes.DECIMAL,
     berat_badan: DataTypes.DECIMAL,
-    status: DataTypes.STRING,
+    status_lingkar_kepala: DataTypes.INTEGER,
+    status_tinggi: DataTypes.INTEGER,
+    status_berat_badan: DataTypes.INTEGER,
+    catatan: DataTypes.STRING,
     OrangTua_Wali_id: DataTypes.INTEGER,
     Petugas_id: DataTypes.INTEGER,
     Dokter_id: DataTypes.INTEGER
