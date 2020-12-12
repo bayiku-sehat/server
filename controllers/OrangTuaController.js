@@ -55,7 +55,7 @@ class OrangTuaController {
           id: req.params.orangtua_id
         }
       })
-      if(deleteOrangtua === 1) {
+      if (deleteOrangtua === 1) {
         res.status(200).json({ message: "data orang tua/wali telah dihapus." })
       } else {
         res.status(400).json({ message: "data orang tua/wali tidak ditemukan." })

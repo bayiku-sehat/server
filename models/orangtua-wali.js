@@ -14,18 +14,74 @@ module.exports = (sequelize, DataTypes) => {
       Orangtua_Wali.hasMany(models.Bayi, {
         sourceKey: 'id',
         foreignKey: 'OrangTua_Wali_id'
-        
+
       })
     }
   };
   Orangtua_Wali.init({
-    nama: DataTypes.STRING,
-    alamat: DataTypes.STRING,
-    usia: DataTypes.INTEGER,
-    jenis_kelamin: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    no_hp: DataTypes.INTEGER
+    nama: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    },
+    alamat: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    },
+    usia: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    },
+    jenis_kelamin: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    },
+    username: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Username must not empty`
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Password must not empty`
+        }
+      }
+    },
+    no_hp: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'Orangtua_Wali',

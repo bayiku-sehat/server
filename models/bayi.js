@@ -1,5 +1,5 @@
 'use strict';
-const {BeratBadan} = require('./')
+const { BeratBadan } = require('./')
 const {
   Model
 } = require('sequelize');
@@ -27,16 +27,78 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Bayi.init({
-    nama: DataTypes.STRING,
-    tanggal_lahir: DataTypes.DATE,
-    jenis_kelamin: DataTypes.STRING,
-    lingkar_kepala: DataTypes.DECIMAL,
-    tinggi: DataTypes.DECIMAL,
-    berat_badan: DataTypes.DECIMAL,
-    status: DataTypes.STRING,
-    OrangTua_Wali_id: DataTypes.INTEGER,
-    Petugas_id: DataTypes.INTEGER,
-    Dokter_id: DataTypes.INTEGER
+    nama: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    },
+    tanggal_lahir: {
+      type: DataTypes.DATE,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please input the Date`
+        }
+      }
+    },
+    jenis_kelamin: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please input the field`
+        }
+      }
+    }, 
+    lingkar_kepala: {
+      type: DataTypes.DECIMAL,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    },
+    tinggi: {
+      type: DataTypes.DECIMAL,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    },
+    berat_badan: {
+      type: DataTypes.DECIMAL,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    },
+    status: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: `Please fill the field`
+        }
+      }
+    }, 
+    OrangTua_Wali_id: {
+      type: DataTypes.INTEGER,
+    },
+    Petugas_id: {
+      type: DataTypes.INTEGER,
+    },
+    Dokter_id: {
+      type: DataTypes.INTEGER
+    },
   }, {
     sequelize,
     modelName: 'Bayi',
