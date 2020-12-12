@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     no_hp: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Orangtua-Wali',
+    modelName: 'Orangtua_Wali',
   });
   return Orangtua_Wali;
 };

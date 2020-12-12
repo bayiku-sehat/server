@@ -1,15 +1,16 @@
 'use strict'
-const { Petugas } = require('../models/index')
+const { Dokter } = require('../models/index')
 
-class PetugasController {
+class DokterController {
   static async show(req, res, next) {
     try {
-      const data = await Petugas.findAll({ include: ['Bayis'] })
+      const data = await Dokter.findall({ include: ['Bayis'] })
       res.status(200).json(data)
     } catch (error) {
       next(error)
     }
   }
+
   static async add(req, res, next) {
     try {
       let params = {
@@ -18,16 +19,18 @@ class PetugasController {
         usia: req.body.usia,
         no_hp: req.body.no_hp,
         jenis_kelamin: req.body.jenis_kelamin,
+        spesialisasi: req.body.spesialisasi,
         username: req.body.username,
         password: req.body.password
       }
-      const data = await Petugas.create(params)
+      const data = await Dokter.create(params)
       res.status(201).json(data)
     } catch (error) {
       next(error)
     }
   }
-  static async editPetugas(req, res, next) {
+
+  static async editDokter(req, res, next) {
     try {
       let params = {
         nama: req.body.nama,
@@ -35,12 +38,13 @@ class PetugasController {
         usia: req.body.usia,
         no_hp: req.body.no_hp,
         jenis_kelamin: req.body.jenis_kelamin,
+        spesialisasi: req.body.spesialisasi,
         username: req.body.username,
         password: req.body.password
       }
-      const data = await Petugas.update(params, {
+      const data = await Dokter.update(params, {
         where: {
-          id: req.params.petugas_id
+          id: req.params.Dokter_id
         }
       })
       res.status(200).json(data)
@@ -48,18 +52,19 @@ class PetugasController {
       next(error)
     }
   }
-  static async deletePetugas(req, res, next) {
+
+  static async deleteDokter(req, res, next) {
     try {
-      const deletePetugas = await Petugas.destroy({
+      const data = await Dokter.destroy({
         where: {
-          id: req.params.petugas_id
+          id: req.params.Dokter_id
         }
       })
-      res.status(200).json({ name: "data orangtua has been delete." })
+      res.status(200).json({ msg: "Dokter has been deleted" })
     } catch (error) {
       next(error)
     }
   }
 }
 
-module.exports = PetugasController
+module.exports = DokterController

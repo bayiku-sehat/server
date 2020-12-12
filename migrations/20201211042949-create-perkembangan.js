@@ -11,20 +11,17 @@ module.exports = {
       catatan: {
         type: Sequelize.STRING
       },
-      jenis_kelamin: {
-        type: Sequelize.STRING
-      },
       tanggal_pemeriksaan: {
         type: Sequelize.DATE
       },
       lingkar_kepala: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       tinggi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       berat_badan: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       status: {
         type: Sequelize.STRING
