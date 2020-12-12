@@ -18,13 +18,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       lingkar_kepala: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       tinggi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       berat_badan: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       status: {
         type: Sequelize.STRING

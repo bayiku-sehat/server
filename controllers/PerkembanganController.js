@@ -1,217 +1,194 @@
 'use strict'
-const { Bayi, TinggiBadan, BeratBadan, LingkarKepala } = require('../models/index')
+const { Bayi, TinggiBadan, BeratBadan, LingkarKepala, Perkembangan } = require('../models/index')
 
-class BayiController {
-  static async show(req, res, next) {
+class PerkembanganController {
+  static async addPerkembangan(req, res, next) {
     try {
-      const data = await Bayi.findAll({ include: ['Orangtua_Wali'] })
-      res.status(200).json(data)
-    } catch (error) {
-      next(error)
-    }
-  }
-  static async showDetail(req, res, next) {
-    try {
-      const data = await Bayi.findOne({
-        where: {
-          id: req.params.bayi_id
-        },
-        include: ['Orangtua_Wali', 'Perkembangans']
-      })
-      res.status(200).json(data)
-    } catch (error) {
-      next(error)
-    }
-  }
-  static async add(req, res, next) {
-    try {
+      const bayiId = req.params.bayi_id
+      const bayi = await Bayi.findByPk(bayiId)
       let params = {
-        nama: req.body.nama,
-        tanggal_lahir: new Date(req.body.tanggal_lahir),
-        jenis_kelamin: req.body.jenis_kelamin,
+        catatan: req.body.catatan,
+        tanggal_pemeriksaan: new Date(),
         lingkar_kepala: +req.body.lingkar_kepala,
         tinggi: +req.body.tinggi_badan,
         berat_badan: +req.body.berat_badan,
-        Dokter_id: 1,
-        Petugas_id: 1,
-        OrangTua_Wali_id: 1
+        Bayi_id: bayi.id
       }
-      const month = Math.round((new Date() - params.tanggal_lahir) / 2669599261)
+      const month = Math.round((new Date() - bayi.tanggal_lahir) / 2669599261)
       const whoTinggiBadan = await TinggiBadan.findOne({
         where: {
           bulan: month,
-          jenisKelamin: params.jenis_kelamin
+          jenisKelamin: bayi.jenis_kelamin
         }
       })
       const whoBeratBadan = await BeratBadan.findOne({
         where: {
           bulan: month,
-          jenisKelamin: params.jenis_kelamin
+          jenisKelamin: bayi.jenis_kelamin
         }
       })
       const whoLingkarKepala = await LingkarKepala.findOne({
         where: {
           bulan: month,
-          jenisKelamin: params.jenis_kelamin
+          jenisKelamin: bayi.jenis_kelamin
         }
       })
       if (params.tinggi < whoTinggiBadan.sd_1 && params.tinggi > whoTinggiBadan.sd_n1) {
-        params.status = 'Tinggi badan Normal, '
+        params.status = 'Tinggi Normal, '
       } else if (params.tinggi >= whoTinggiBadan.sd_1 && params.tinggi < whoTinggiBadan.sd_2) {
-        params.status = 'Tinggi Badan sedikit berlebih, '
+        params.status = 'Ketinggian dikit, '
       } else if (params.tinggi >= whoTinggiBadan.sd_2 && params.tinggi < whoTinggiBadan.sd_3) {
-        params.status = 'Tinggi badan berlebih, '
+        params.status = 'Ketinggian berlebih, '
       } else if (params.tinggi >= whoTinggiBadan.sd_3) {
-        params.status = 'Tinggi badan sangat berlebih, '
+        params.status = 'Ketinggian berlebih sekali, '
       } else if (params.tinggi <= whoTinggiBadan.sd_n1 && params.tinggi > whoTinggiBadan.sd_n2) {
-        params.status = 'Tinggi badan sedikit kurang, '
+        params.status = 'Ketinggian kurang dikit, '
       } else if (params.tinggi <= whoTinggiBadan.sd_n2 && params.tinggi >= whoTinggiBadan.sd_n3) {
-        params.status = 'Tinggi badan kurang, '
+        params.status = 'Ketinggian  kurang, '
       } else if (params.tinggi < whoTinggiBadan.sd_n3) {
-        params.status = 'tinggi badan sangat kurang, '
+        params.status = 'Ketinggian kurang sekali, '
       }
       if (params.berat_badan < whoBeratBadan.sd_1 && params.berat_badan > whoBeratBadan.sd_n1) {
-        params.status += 'berat badan normal, '
+        params.status += 'Berat Normal, '
       } else if (params.berat_badan >= whoBeratBadan.sd_1 && params.berat_badan < whoBeratBadan.sd_2) {
-        params.status += 'berat badan berlebih sedikit, '
+        params.status += 'Berat berlebih dikit, '
       } else if (params.berat_badan >= whoBeratBadan.sd_2 && params.berat_badan < whoBeratBadan.sd_3) {
-        params.status += 'berat badan berlebih, '
+        params.status += 'Berat berlebih, '
       } else if (params.berat_badan >= whoBeratBadan.sd_3) {
-        params.status += 'berat badan sangat berlebih, '
+        params.status += 'Berat berlebih sekali, '
       } else if (params.berat_badan <= whoBeratBadan.sd_n1 && params.berat_badan > whoBeratBadan.sd_n2) {
-        params.status += 'berat badan kurang sedikit, '
+        params.status += 'Berat kurang dikit, '
       } else if (params.berat_badan <= whoBeratBadan.sd_n2 && params.berat_badan >= whoBeratBadan.sd_n3) {
-        params.status += 'berat badan kurang, '
+        params.status += 'Berat kurang, '
       } else if (params.berat_badan < whoBeratBadan.sd_n3) {
-        params.status += 'berat badan sangat kurang, '
+        params.status += 'Berat kurang sekali, '
       }
       if (params.lingkar_kepala < whoLingkarKepala.sd_1 && params.lingkar_kepala > whoLingkarKepala.sd_n1) {
-        params.status += 'lingkar kepala normal.'
+        params.status += 'Lingkar kepala Normal.'
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_1 && params.lingkar_kepala < whoLingkarKepala.sd_2) {
-        params.status += 'lingkar kepala berlebih sedikit.'
+        params.status += 'Lingkar kepala berlebih dikit.'
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_2 && params.lingkar_kepala < whoLingkarKepala.sd_3) {
-        params.status += 'lingkar kepala berlebih.'
+        params.status += 'Lingkar kepala berlebih.'
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_3) {
-        params.status += 'lingkar kepala sangat berlebih.'
+        params.status += 'Lingkar kepala berlebih sekali.'
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n1 && params.lingkar_kepala > whoLingkarKepala.sd_n2) {
-        params.status += 'lingkar kepala kurang sedikit.'
+        params.status += 'Lingkar kepala kurang dikit.'
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n2 && params.lingkar_kepala >= whoLingkarKepala.sd_n3) {
-        params.status += 'lingkar kepala kurang.'
+        params.status += 'Lingkar kepala kurang.'
       } else if (params.lingkar_kepala < whoLingkarKepala.sd_n3) {
-        params.status += 'lingkar kepala sangat kurang.'
+        params.status += 'Lingkar kepala kurang sekali.'
       }
-      const data = await Bayi.create(params)
+      const data = await Perkembangan.create(params)
       res.status(201).json(data)
-    } catch (error) {
+    } catch(error) {
       next(error)
     }
   }
-  static async editBayi(req, res, next) {
+  static async editPerkembangan(req, res, next) {
     try {
+      const bayiId = req.params.bayi_id
+      const bayi = await Bayi.findByPk(bayiId)
       let params = {
-        nama: req.body.nama,
-        tanggal_lahir: new Date(req.body.tanggal_lahir),
-        jenis_kelamin: req.body.jenis_kelamin,
+        catatan: req.body.catatan,
+        tanggal_pemeriksaan: new Date(),
         lingkar_kepala: +req.body.lingkar_kepala,
         tinggi: +req.body.tinggi_badan,
         berat_badan: +req.body.berat_badan,
-        Dokter_id: 1,
-        Petugas_id: 1,
-        OrangTua_Wali_id: req.body.OrangTua_Wali_id
+        Bayi_id: bayi.id
       }
-      const month = Math.round((new Date() - params.tanggal_lahir) / 2669599261)
+      const month = Math.round((new Date() - bayi.tanggal_lahir) / 2669599261)
       const whoTinggiBadan = await TinggiBadan.findOne({
         where: {
           bulan: month,
-          jenisKelamin: params.jenis_kelamin
+          jenisKelamin: bayi.jenis_kelamin
         }
       })
       const whoBeratBadan = await BeratBadan.findOne({
         where: {
           bulan: month,
-          jenisKelamin: params.jenis_kelamin
+          jenisKelamin: bayi.jenis_kelamin
         }
       })
       const whoLingkarKepala = await LingkarKepala.findOne({
         where: {
           bulan: month,
-          jenisKelamin: params.jenis_kelamin
+          jenisKelamin: bayi.jenis_kelamin
         }
       })
       if (params.tinggi < whoTinggiBadan.sd_1 && params.tinggi > whoTinggiBadan.sd_n1) {
-        params.status = 'Tinggi badan Normal, '
+        params.status = 'Tinggi Normal, '
       } else if (params.tinggi >= whoTinggiBadan.sd_1 && params.tinggi < whoTinggiBadan.sd_2) {
-        params.status = 'Tinggi Badan sedikit berlebih, '
+        params.status = 'Ketinggian dikit, '
       } else if (params.tinggi >= whoTinggiBadan.sd_2 && params.tinggi < whoTinggiBadan.sd_3) {
-        params.status = 'Tinggi badan berlebih, '
+        params.status = 'Ketinggian berlebih, '
       } else if (params.tinggi >= whoTinggiBadan.sd_3) {
-        params.status = 'Tinggi badan sangat berlebih, '
+        params.status = 'Ketinggian berlebih sekali, '
       } else if (params.tinggi <= whoTinggiBadan.sd_n1 && params.tinggi > whoTinggiBadan.sd_n2) {
-        params.status = 'Tinggi badan sedikit kurang, '
+        params.status = 'Ketinggian kurang dikit, '
       } else if (params.tinggi <= whoTinggiBadan.sd_n2 && params.tinggi >= whoTinggiBadan.sd_n3) {
-        params.status = 'Tinggi badan kurang, '
+        params.status = 'Ketinggian  kurang, '
       } else if (params.tinggi < whoTinggiBadan.sd_n3) {
-        params.status = 'tinggi badan sangat kurang, '
+        params.status = 'Ketinggian kurang sekali, '
       }
       if (params.berat_badan < whoBeratBadan.sd_1 && params.berat_badan > whoBeratBadan.sd_n1) {
-        params.status += 'berat badan normal, '
+        params.status += 'Berat Normal, '
       } else if (params.berat_badan >= whoBeratBadan.sd_1 && params.berat_badan < whoBeratBadan.sd_2) {
-        params.status += 'berat badan berlebih sedikit, '
+        params.status += 'Berat berlebih dikit, '
       } else if (params.berat_badan >= whoBeratBadan.sd_2 && params.berat_badan < whoBeratBadan.sd_3) {
-        params.status += 'berat badan berlebih, '
+        params.status += 'Berat berlebih, '
       } else if (params.berat_badan >= whoBeratBadan.sd_3) {
-        params.status += 'berat badan sangat berlebih, '
+        params.status += 'Berat berlebih sekali, '
       } else if (params.berat_badan <= whoBeratBadan.sd_n1 && params.berat_badan > whoBeratBadan.sd_n2) {
-        params.status += 'berat badan kurang sedikit, '
+        params.status += 'Berat kurang dikit, '
       } else if (params.berat_badan <= whoBeratBadan.sd_n2 && params.berat_badan >= whoBeratBadan.sd_n3) {
-        params.status += 'berat badan kurang, '
+        params.status += 'Berat kurang, '
       } else if (params.berat_badan < whoBeratBadan.sd_n3) {
-        params.status += 'berat badan sangat kurang, '
+        params.status += 'Berat kurang sekali, '
       }
       if (params.lingkar_kepala < whoLingkarKepala.sd_1 && params.lingkar_kepala > whoLingkarKepala.sd_n1) {
-        params.status += 'lingkar kepala normal.'
+        params.status += 'Lingkar kepala Normal.'
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_1 && params.lingkar_kepala < whoLingkarKepala.sd_2) {
-        params.status += 'lingkar kepala berlebih sedikit.'
+        params.status += 'Lingkar kepala berlebih dikit.'
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_2 && params.lingkar_kepala < whoLingkarKepala.sd_3) {
-        params.status += 'lingkar kepala berlebih.'
+        params.status += 'Lingkar kepala berlebih.'
       } else if (params.lingkar_kepala >= whoLingkarKepala.sd_3) {
-        params.status += 'lingkar kepala sangat berlebih.'
+        params.status += 'Lingkar kepala berlebih sekali.'
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n1 && params.lingkar_kepala > whoLingkarKepala.sd_n2) {
-        params.status += 'lingkar kepala kurang sedikit.'
+        params.status += 'Lingkar kepala kurang dikit.'
       } else if (params.lingkar_kepala <= whoLingkarKepala.sd_n2 && params.lingkar_kepala >= whoLingkarKepala.sd_n3) {
-        params.status += 'lingkar kepala kurang.'
+        params.status += 'Lingkar kepala kurang.'
       } else if (params.lingkar_kepala < whoLingkarKepala.sd_n3) {
-        params.status += 'lingkar kepala sangat kurang.'
+        params.status += 'Lingkar kepala kurang sekali.'
       }
-      const data = await Bayi.update(params, {
+      const data = await Perkembangan.update(params, {
         where: {
-          id: req.params.bayi_id
+          id: req.params.perkembangan_id
         },
         returning: true
       })
       res.status(200).json(data[1][0])
-    } catch (error) {
+    } catch(error) {
       next(error)
     }
   }
-  static async deleteBayi(req, res, next) {
+
+  static async deletePerkembangan(req, res, next) {
     try {
-      const deleteBayi = await Bayi.destroy({
+      const deletePerkembangan = await Perkembangan.destroy({
         where: {
-          id: req.params.bayi_id
+          id: req.params.perkembangan_id
         }
       })
-      if (deleteBayi === 1) {
-        res.status(200).json({ message: "data bayi sudah dihapus." })
+      if(deletePerkembangan === 1) {
+        res.status(200).json({name: "Data perkembangan bayi telah dihapus."})
       } else {
-        res.status(400).json({ message: "data bayi tidak ditemukan." })
+        res.status(400).json({message: "Data perkembangan bayi tidak ditemukan."})
       }
     } catch (error) {
       next(error)
     }
   }
-
 }
 
 
-module.exports = BayiController
+module.exports = PerkembanganController

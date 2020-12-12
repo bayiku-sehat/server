@@ -1,4 +1,5 @@
 'use strict';
+const {BeratBadan} = require('./')
 const {
   Model
 } = require('sequelize');
@@ -15,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         foreignKey: 'Dokter_id'
       })
-      Bayi.belongsTo(models.OrangTua_Wali, {
+      Bayi.belongsTo(models.Orangtua_Wali, {
         targetKey: 'id',
         foreignKey: 'OrangTua_Wali_id'
       })
@@ -29,9 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     nama: DataTypes.STRING,
     tanggal_lahir: DataTypes.DATE,
     jenis_kelamin: DataTypes.STRING,
-    lingkar_kepala: DataTypes.INTEGER,
-    tinggi: DataTypes.INTEGER,
-    berat_badan: DataTypes.INTEGER,
+    lingkar_kepala: DataTypes.DECIMAL,
+    tinggi: DataTypes.DECIMAL,
+    berat_badan: DataTypes.DECIMAL,
     status: DataTypes.STRING,
     OrangTua_Wali_id: DataTypes.INTEGER,
     Petugas_id: DataTypes.INTEGER,
