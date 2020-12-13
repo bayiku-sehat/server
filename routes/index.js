@@ -3,7 +3,7 @@ const BayiController = require('../controllers/BayiController')
 const OrangTuaController = require('../controllers/OrangTuaController')
 const PetugasController = require('../controllers/PetugasController')
 const PerkembanganController = require('../controllers/PerkembanganController')
-const DokterController = require('../controllers/DokterController')
+// const DokterController = require('../controllers/DokterController')
 const DataWHOController = require('../controllers/DataWHOController')
 
 const router = require('express').Router()
