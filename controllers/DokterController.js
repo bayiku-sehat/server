@@ -1,10 +1,10 @@
 'use strict'
-const { Dokter } = require('../models/index')
+const { Dokter, Pasien } = require('../models/index')
 
 class DokterController {
   static async show(req, res, next) {
     try {
-      const data = await Dokter.findall({ include: ['Bayis'] })
+      const data = await Dokter.findAll({ include: ['Bayis'] })
       res.status(200).json(data)
     } catch (error) {
       next(error)
@@ -20,6 +20,7 @@ class DokterController {
         no_hp: req.body.no_hp,
         jenis_kelamin: req.body.jenis_kelamin,
         spesialisasi: req.body.spesialisasi,
+        Bayi_id: req.body.Bayi_id,
         username: req.body.username,
         password: req.body.password
       }
@@ -39,6 +40,7 @@ class DokterController {
         no_hp: req.body.no_hp,
         jenis_kelamin: req.body.jenis_kelamin,
         spesialisasi: req.body.spesialisasi,
+        Bayi_id: req.body.Bayi_id,
         username: req.body.username,
         password: req.body.password
       }
@@ -61,6 +63,35 @@ class DokterController {
         }
       })
       res.status(200).json({ msg: "Dokter has been deleted" })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async addBayiToDokter(req, res, next) {
+    try {
+      const dokterId = 1
+      const bayiId = req.params.bayi_id
+      const pasien = {
+        Bayi_id: bayiId,
+        status: req.body.status,
+        DokterId: dokterId
+      }
+      const data = await Pasien(pasien)
+      res.status(201).json(data)
+    } catch (error) {
+      next(error)
+    }
+  }
+  static async deleteBayiInDokter(req, res, next) {
+    try {
+      const bayiId = req.params.bayi_id
+      const data = await Pasien.destroy({
+        where: {
+          id: bayiId
+        }
+      })
+      res.status(200).json({ msg: "data pasien sudah dihapus" })
     } catch (error) {
       next(error)
     }

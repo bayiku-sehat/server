@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "nama": "Ani",
+        "alamat": "Jakarta",
+        "usia": 25,
+        "jenis_kelamin": "Perempuan",
+        "username": "maryam",
+        "password": "xxxxx",
+        "no_hp": 82512,
+        "role": "Perawat",
+        "createdAt": "2020-12-12T11:21:38.399Z",
+        "updatedAt": "2020-12-12T11:21:38.399Z"
+    },
+    {
+        "id": 2,
+        "nama": "Ina",
+        "alamat": "Jakarta",
+        "usia": 26,
+        "jenis_kelamin": "Perempuan",
+        "username": "maryamdgfw",
+        "password": "ccccccccc",
+        "no_hp": 82512,
+        "role": "Relawan",
+        "createdAt": "2020-12-12T11:22:07.957Z",
+        "updatedAt": "2020-12-12T11:22:07.957Z"
+    }
+]
