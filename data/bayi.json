@@ -11,9 +11,6 @@
         "status_tinggi": 1,
         "status_berat_badan": 3,
         "catatan": "perkembangnnya terlampau cepat",
-        "OrangTua_Wali_id": 1,
-        "Petugas_id": 1,
-        "Dokter_id": 1,
         "createdAt": "2020-12-12T11:10:38.834Z",
         "updatedAt": "2020-12-12T11:10:38.834Z"
     },
@@ -29,9 +26,6 @@
         "status_tinggi": 0,
         "status_berat_badan": 1,
         "catatan": "perkembangnnya terlampau cepat",
-        "OrangTua_Wali_id": 2,
-        "Petugas_id": 1,
-        "Dokter_id": 2,
         "createdAt": "2020-12-12T11:10:01.204Z",
         "updatedAt": "2020-12-12T11:10:01.204Z"
     },
@@ -47,9 +41,6 @@
         "status_tinggi": -1,
         "status_berat_badan": 0,
         "catatan": "perkembangnnya terlampau cepat",
-        "OrangTua_Wali_id": 3,
-        "Petugas_id": 2,
-        "Dokter_id": 1,
         "createdAt": "2020-12-12T11:09:08.200Z",
         "updatedAt": "2020-12-12T11:09:08.200Z"
     }

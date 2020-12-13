@@ -24,5 +24,71 @@
         "role": "Relawan",
         "createdAt": "2020-12-12T11:22:07.957Z",
         "updatedAt": "2020-12-12T11:22:07.957Z"
+    },
+    
+    {
+        "id": 5,
+        "nama": "maryam",
+        "alamat": "Jakarta",
+        "usia": 45,
+        "jenis_kelamin": "Perempuan",
+        "username": "maryam",
+        "password": "syssy",
+        "no_hp": 82512,
+        "role": "Orang Tua",
+        "createdAt": "2020-12-12T11:17:01.410Z",
+        "updatedAt": "2020-12-12T11:17:01.410Z"
+    },
+    {
+        "id": 6,
+        "nama": "Susi",
+        "alamat": "Jakarta",
+        "usia": 22,
+        "jenis_kelamin": "Perempuan",
+        "username": "maryam",
+        "password": "syssy",
+        "no_hp": 82512,
+        "role": "Orang Tua",
+        "createdAt": "2020-12-12T11:17:20.247Z",
+        "updatedAt": "2020-12-12T11:17:20.247Z"
+    },
+    {
+        "id": 7,
+        "nama": "Dama",
+        "alamat": "Jakarta",
+        "usia": 34,
+        "jenis_kelamin": "Perempuan",
+        "username": "maryam",
+        "password": "syssy",
+        "no_hp": 82512,
+        "role": "Orang Tua",
+        "createdAt": "2020-12-12T11:17:31.809Z",
+        "updatedAt": "2020-12-12T11:17:31.809Z"
+    },
+    {
+        "id": 8,
+        "nama": "Dr. Boyke",
+        "alamat": "Jakarta",
+        "usia": 56,
+        "jenis_kelamin": "Laki-laki",
+        "username": "boyke",
+        "password": "mania",
+        "no_hp": 845432543,
+        "role": "Dokter",
+        "createdAt": "2020-12-12T11:13:27.564Z",
+        "updatedAt": "2020-12-12T11:13:27.564Z"
+    },
+    {
+        "id": 9,
+        "nama": "Dr. Herman",
+        "alamat": "Jakarta",
+        "usia": 56,
+        "jenis_kelamin": "Laki-laki",
+        "username": "herman",
+        "password": "mania",
+        "no_hp": 845432543,
+        "role": "Dokter",
+        "createdAt": "2020-12-12T11:14:13.271Z",
+        "updatedAt": "2020-12-12T11:14:13.271Z"
     }
 ]

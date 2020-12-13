@@ -38,15 +38,6 @@ module.exports = {
       catatan: {
         type: Sequelize.STRING
       },
-      OrangTua_Wali_id: {
-        type: Sequelize.INTEGER
-      },
-      Petugas_id: {
-        type: Sequelize.INTEGER
-      },
-      Dokter_id: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

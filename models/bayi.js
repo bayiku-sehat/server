@@ -37,9 +37,6 @@ module.exports = (sequelize, DataTypes) => {
     status_tinggi: DataTypes.INTEGER,
     status_berat_badan: DataTypes.INTEGER,
     catatan: DataTypes.STRING,
-    OrangTua_Wali_id: DataTypes.INTEGER,
-    Petugas_id: DataTypes.INTEGER,
-    Dokter_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Bayi',

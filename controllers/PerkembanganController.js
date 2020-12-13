@@ -188,7 +188,34 @@ class PerkembanganController {
       next(error)
     }
   }
+  static async addBayiToDokter(req, res, next) {
+    try {
+      const dokterId = 1
+      const bayiId = req.params.bayi_id
+      const pasien = {
+        Bayi_id: bayiId,
+        status: req.body.status,
+        DokterId: dokterId
+      }
+      const data = await Pasien(pasien)
+      res.status(201).json(data)
+    } catch (error) {
+      next(error)
+    }
+  }
+  static async deleteBayiInDokter(req, res, next) {
+    try {
+      const bayiId = req.params.bayi_id
+      const data = await Pasien.destroy({
+        where: {
+          id: bayiId
+        }
+      })
+      res.status(200).json({ msg: "data pasien sudah dihapus" })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
-
 
 module.exports = PerkembanganController
