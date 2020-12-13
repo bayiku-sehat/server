@@ -11,8 +11,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-  const data = fs.readFileSync('./data/dokter.json','utf8')
-  await queryInterface.bulkInsert('Dokters', JSON.parse(data), {})
+  const data = fs.readFileSync('./data/user.json','utf8')
+  await queryInterface.bulkInsert('Users',JSON.parse(data), {})
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -22,6 +22,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Dokters', null, {});
+    await queryInterface.bulkDelete('Users', null, {});
   }
 };

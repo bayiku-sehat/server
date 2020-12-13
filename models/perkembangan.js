@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     status_lingkar_kepala: DataTypes.INTEGER,
     status_tinggi: DataTypes.INTEGER,
     status_berat_badan: DataTypes.INTEGER,
-    catatan: DataTypes.STRING,
-    Bayi_id: DataTypes.INTEGER
+    BayiId: DataTypes.INTEGER,
+    UserId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Perkembangan',

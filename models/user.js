@@ -2,8 +2,9 @@
 const {
   Model
 } = require('sequelize');
+const { makeHash } = require('../helpers/hash');
 module.exports = (sequelize, DataTypes) => {
-  class Petugas extends Model {
+  class User extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,13 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Petugas.hasMany(models.Bayi, {
-        sourceKey: 'id',
-        foreignKey: 'Petugas_id'
-      })
+      User.belongsToMany(models.Bayi, {through: models.BayiUser})
     }
   };
-  Petugas.init({
+  User.init({
     nama: DataTypes.STRING,
     alamat: DataTypes.STRING,
     usia: DataTypes.INTEGER,
@@ -25,10 +23,22 @@ module.exports = (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     no_hp: DataTypes.INTEGER,
-    role: DataTypes.STRING
-  }, {
+    role: DataTypes.STRING,
+    alamat_puskesmas: DataTypes.STRING,
+    foto: DataTypes.STRING
+  }, { hooks: {
+    beforeCreate (user) {
+      user.password = makeHash(user.password)
+    },
+    beforeValidate (user) {
+      user.password = makeHash(user.password)
+    },
+    beforeUpdate(user) {
+    user.password = makeHash(user.password)
+  },
+  },
     sequelize,
-    modelName: 'Petugas',
+    modelName: 'User',
   });
-  return Petugas;
+  return User;
 };

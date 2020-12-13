@@ -1,5 +1,5 @@
 'use strict';
-const {BeratBadan} = require('./')
+const { BeratBadan } = require('./')
 const {
   Model
 } = require('sequelize');
@@ -12,18 +12,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Bayi.belongsTo(models.Orangtua_Wali, {
-        targetKey: 'id',
-        foreignKey: 'OrangTua_Wali_id'
-      })
+
+      Bayi.belongsToMany(models.User, {through: models.BayiUser})
+  
       Bayi.hasMany(models.Perkembangan, {
         sourceKey: 'id',
-        foreignKey: 'Bayi_id'
+        foreignKey: 'BayiId'
       })
-      Bayi.belongsToMany(models.Dokter, {
-        through: models.Pasien, 
-        targetKey: 'id',
-      foreignKey: 'Bayi_id'})
     }
   };
   Bayi.init({
@@ -36,7 +31,10 @@ module.exports = (sequelize, DataTypes) => {
     status_lingkar_kepala: DataTypes.INTEGER,
     status_tinggi: DataTypes.INTEGER,
     status_berat_badan: DataTypes.INTEGER,
-    catatan: DataTypes.STRING,
+    status_kasus: DataTypes.STRING,
+    verify_date: DataTypes.DATE,
+    status_verify: DataTypes.STRING,
+    verifyById: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Bayi',

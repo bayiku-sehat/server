@@ -1,6 +1,5 @@
 [
     {
-        "id": 3,
         "nama": "Tama",
         "tanggal_lahir": "2020-12-11T17:00:00.000Z",
         "jenis_kelamin": "Perempuan",
@@ -10,12 +9,10 @@
         "status_lingkar_kepala": 3,
         "status_tinggi": 1,
         "status_berat_badan": 3,
-        "catatan": "perkembangnnya terlampau cepat",
         "createdAt": "2020-12-12T11:10:38.834Z",
         "updatedAt": "2020-12-12T11:10:38.834Z"
     },
     {
-        "id": 2,
         "nama": "Susi",
         "tanggal_lahir": "2020-12-11T17:00:00.000Z",
         "jenis_kelamin": "Perempuan",
@@ -25,12 +22,10 @@
         "status_lingkar_kepala": 1,
         "status_tinggi": 0,
         "status_berat_badan": 1,
-        "catatan": "perkembangnnya terlampau cepat",
         "createdAt": "2020-12-12T11:10:01.204Z",
         "updatedAt": "2020-12-12T11:10:01.204Z"
     },
     {
-        "id": 1,
         "nama": "Marni",
         "tanggal_lahir": "2020-12-11T17:00:00.000Z",
         "jenis_kelamin": "Perempuan",
@@ -40,7 +35,6 @@
         "status_lingkar_kepala": -1,
         "status_tinggi": -1,
         "status_berat_badan": 0,
-        "catatan": "perkembangnnya terlampau cepat",
         "createdAt": "2020-12-12T11:09:08.200Z",
         "updatedAt": "2020-12-12T11:09:08.200Z"
     }

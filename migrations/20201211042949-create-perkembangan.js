@@ -29,10 +29,10 @@ module.exports = {
       status_berat_badan: {
         type: Sequelize.INTEGER
       },
-      catatan: {
-        type: Sequelize.STRING
+      BayiId: {
+        type: Sequelize.INTEGER
       },
-      Bayi_id: {
+      UserId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
