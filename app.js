@@ -16,3 +16,5 @@ app.use(errorHandler)
 app.listen(PORT, () => {
   console.log(`aplikasi bayiku sehat berjalan di port ${PORT}`);
 })
+
+module.exports = app

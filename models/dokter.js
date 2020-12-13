@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Dokter.init({
-<<<<<<< HEAD
     nama: {
       type: DataTypes.STRING,
       validate: {
@@ -92,17 +91,6 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-=======
-    nama: DataTypes.STRING,
-    alamat: DataTypes.STRING,
-    usia: DataTypes.INTEGER,
-    jenis_kelamin: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    no_hp: DataTypes.INTEGER,
-    spesialisasi: DataTypes.STRING,
-    Bayi_id: DataTypes.INTEGER
->>>>>>> b38d4b45ea0b1d24dbd6dca63ed9efb760683982
   }, {
     sequelize,
     modelName: 'Dokter',
