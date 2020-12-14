@@ -9,6 +9,8 @@
         "status_lingkar_kepala": 3,
         "status_tinggi": 1,
         "status_berat_badan": 3,
+        "status_kasus": "Open",
+        "status_verify": null,
         "createdAt": "2020-12-12T11:10:38.834Z",
         "updatedAt": "2020-12-12T11:10:38.834Z"
     },

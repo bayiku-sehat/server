@@ -16,7 +16,7 @@ class BayiController {
         where: {
           id: req.params.bayiId
         },
-        include: ['Users', 'Perkembangans']
+        include: ['Users', 'Perkembangans', 'User']
       })
       res.status(200).json(data)
     } catch (error) {
@@ -107,6 +107,7 @@ class BayiController {
       })
       res.status(201).json(data)
     } catch (error) {
+      console.log(error, "<<<<<< ini error");
       next(error)
     }
   }
