@@ -105,7 +105,6 @@ class UserController {
         username: req.body.username,
         password: req.body.password,
       }
-      console.log(account)
       const user = await User.findOne({
         where: {
           username: account.username,

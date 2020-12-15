@@ -2,9 +2,10 @@ const request = require('supertest')
 const app = require('../app')
 const { User, Bayi } = require('../models/index')
 const { signToken } = require('../helpers/jwt')
+const { makeHash } = require('../helpers/hash')
 
-const user = { username: "Maryam", password: "Maryammaryam", role: "Orang Tua" }
-const user2 = { username: "Ani", password: "Aniani", role: "Petugas" }
+const user = { username: "Maryam", password: makeHash("Maryammaryam"), role: "Orang Tua" }
+const user2 = { username: "Ani", password: makeHash("Aniani"), role: "Petugas" }
 const bayi = {
     nama: "Marni",
     tanggal_lahir: "12-12-20",
@@ -50,22 +51,22 @@ beforeAll((done) => {
         })
 })
 
-afterAll((done) => {
-    User.destroy({
-        truncate: true
-    })
-        .then(_ => {
-            return Bayi.destroy({
-                truncate: true
-            })
-        })
-        .then(_ => {
-            return done()
-        })
-        .catch(err => {
-            return done(err)
-        })
-})
+// afterAll((done) => {
+//     User.destroy({
+//         truncate: true
+//     })
+//         .then(_ => {
+//             return Bayi.destroy({
+//                 truncate: true
+//             })
+//         })
+//         .then(_ => {
+//             return done()
+//         })
+//         .catch(err => {
+//             return done(err)
+//         })
+// })
 
 // Succesfull create CRUD 
 

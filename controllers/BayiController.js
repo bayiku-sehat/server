@@ -107,7 +107,6 @@ class BayiController {
       })
       res.status(201).json(data)
     } catch (error) {
-      console.log(error, "<<<<<< ini error");
       next(error)
     }
   }

@@ -29,13 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   }, { hooks: {
     beforeCreate (user) {
       user.password = makeHash(user.password)
-    },
-    beforeValidate (user) {
-      user.password = makeHash(user.password)
-    },
-    beforeUpdate(user) {
-    user.password = makeHash(user.password)
-  },
+    }
   },
     sequelize,
     modelName: 'User',
