@@ -60,5 +60,9 @@ module.exports = (sequelize, DataTypes) => {
       options.where.username = options.where.username.toLowerCase()
     }
   })
+<<<<<<< HEAD
+=======
+
+>>>>>>> e8a4622846d4bce3b8c7811302c41d3816f7cc0e
   return User
 }

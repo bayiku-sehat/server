@@ -15,7 +15,7 @@ function errorHandler(err, req, res, next) {
     statusCode = 400
   }
 
-  else if (err.name === "SequelizeValidateError") {
+  else if (err.name === "SequelizeValidationError") {
     message = err.errors.map(element => {
       errors.push(element.message)
     })
@@ -30,8 +30,6 @@ function errorHandler(err, req, res, next) {
     message = err.message + "user unauthenticated"
     statusCode = 401
   }
-
-  console.log(err);
   res.status(statusCode).json({errors})
 }
 
