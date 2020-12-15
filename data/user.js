@@ -11,7 +11,6 @@ module.exports = [
     foto:
       'https://cdn1-production-images-kly.akamaized.net/CASsRi73DznnCPVGy_MO48zCeMA=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2786209/original/029379000_1556018610-Melody_Nurramdhani.jpg',
   },
-
   {
     nama: 'Ani',
     alamat: 'Jakarta',

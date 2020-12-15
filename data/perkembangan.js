@@ -1,10 +1,5 @@
 module.exports = [
   {
-    nama: 'Tama',
-    tanggal_lahir: '2020-06-11T17:00:00.000Z',
-    jenis_kelamin: 'Laki-laki',
-    foto:
-      'https://akcdn.detik.net.id/visual/2020/04/15/5cc7028a-5809-4d5d-b951-ae8bb43674c0_43.jpeg?w=400&q=90',
     lingkar_kepala: '32.1',
     tinggi: '45.2',
     berat_badan: '2.6',
@@ -19,11 +14,6 @@ module.exports = [
     updatedAt: '2020-06-20T11:10:38.834Z',
   },
   {
-    nama: 'Tama',
-    tanggal_lahir: '2020-06-11T17:00:00.000Z',
-    jenis_kelamin: 'Laki-laki',
-    foto:
-      'https://akcdn.detik.net.id/visual/2020/04/15/5cc7028a-5809-4d5d-b951-ae8bb43674c0_43.jpeg?w=400&q=90',
     lingkar_kepala: '35.5',
     tinggi: '51.5',
     berat_badan: '3.7',
@@ -38,11 +28,6 @@ module.exports = [
     updatedAt: '2020-07-20T11:10:38.834Z',
   },
   {
-    nama: 'Tama',
-    tanggal_lahir: '2020-06-11T17:00:00.000Z',
-    jenis_kelamin: 'Laki-laki',
-    foto:
-      'https://akcdn.detik.net.id/visual/2020/04/15/5cc7028a-5809-4d5d-b951-ae8bb43674c0_43.jpeg?w=400&q=90',
     lingkar_kepala: '38.1',
     tinggi: '55.1',
     berat_badan: '4.7',
@@ -57,11 +42,6 @@ module.exports = [
     updatedAt: '2020-08-20T11:10:38.834Z',
   },
   {
-    nama: 'Tama',
-    tanggal_lahir: '2020-06-11T17:00:00.000Z',
-    jenis_kelamin: 'Laki-laki',
-    foto:
-      'https://akcdn.detik.net.id/visual/2020/04/15/5cc7028a-5809-4d5d-b951-ae8bb43674c0_43.jpeg?w=400&q=90',
     lingkar_kepala: '39.2',
     tinggi: '57.1',
     berat_badan: '5.5',
@@ -76,11 +56,6 @@ module.exports = [
     updatedAt: '2020-09-20T11:10:38.834Z',
   },
   {
-    nama: 'Tama',
-    tanggal_lahir: '2020-06-11T17:00:00.000Z',
-    jenis_kelamin: 'Laki-laki',
-    foto:
-      'https://akcdn.detik.net.id/visual/2020/04/15/5cc7028a-5809-4d5d-b951-ae8bb43674c0_43.jpeg?w=400&q=90',
     lingkar_kepala: '39',
     tinggi: '58.2',
     berat_badan: '5.3',
@@ -95,11 +70,6 @@ module.exports = [
     updatedAt: '2020-10-20T11:10:38.834Z',
   },
   {
-    nama: 'Tama',
-    tanggal_lahir: '2020-06-11T17:00:00.000Z',
-    jenis_kelamin: 'Laki-laki',
-    foto:
-      'https://akcdn.detik.net.id/visual/2020/04/15/5cc7028a-5809-4d5d-b951-ae8bb43674c0_43.jpeg?w=400&q=90',
     lingkar_kepala: '39.8',
     tinggi: '59.7',
     berat_badan: '5.9',
@@ -114,11 +84,6 @@ module.exports = [
     updatedAt: '2020-11-20T11:10:38.834Z',
   },
   {
-    nama: 'Tama',
-    tanggal_lahir: '2020-06-11T17:00:00.000Z',
-    jenis_kelamin: 'Laki-laki',
-    foto:
-      'https://akcdn.detik.net.id/visual/2020/04/15/5cc7028a-5809-4d5d-b951-ae8bb43674c0_43.jpeg?w=400&q=90',
     lingkar_kepala: '39.8',
     tinggi: '61',
     berat_badan: '5.9',
@@ -129,7 +94,7 @@ module.exports = [
     status_verify: 'verified',
     verify_date: '2020-06-11T17:00:00.000Z',
     verifyById: 1,
-    createdAt: '2020-11-20T11:10:38.834Z',
-    updatedAt: '2020-11-20T11:10:38.834Z',
+    createdAt: '2020-12-14T11:10:38.834Z',
+    updatedAt: '2020-12-14T11:10:38.834Z',
   },
 ]

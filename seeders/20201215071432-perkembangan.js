@@ -12,10 +12,10 @@ module.exports = {
      * }], {});
      */
     // const data = fs.readFileSync('./data/bayi.json','utf8')
-    let data = require('../data/bayi.js')
+    let data = require('../data/perkembangan')
     try {
-      const bayis = await queryInterface.bulkInsert('Bayis', data, {})
-      console.log(bayis)
+      const results = await queryInterface.bulkInsert('Perkembangans', data, {})
+      // console.log(results)
     } catch (error) {
       console.log(error)
     }
@@ -28,6 +28,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Bayis', null, {})
+    await queryInterface.bulkDelete('Perkembangans', null, {})
   },
 }

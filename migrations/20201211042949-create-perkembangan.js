@@ -8,9 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tanggal_pemeriksaan: {
-        type: Sequelize.DATE,
-      },
+      // tanggal_pemeriksaan: {
+      //   type: Sequelize.DATE,
+      // },
       lingkar_kepala: {
         type: Sequelize.DECIMAL,
       },

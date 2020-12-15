@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Perkembangan.init(
     {
-      tanggal_pemeriksaan: DataTypes.DATE,
+      // tanggal_pemeriksaan: DataTypes.DATE,
       lingkar_kepala: DataTypes.DECIMAL,
       tinggi: DataTypes.DECIMAL,
       berat_badan: DataTypes.DECIMAL,

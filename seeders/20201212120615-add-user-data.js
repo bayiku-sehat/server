@@ -1,6 +1,5 @@
 'use strict'
-const fs = require('fs')
-import { User } from '../models'
+const { User } = require('../models')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     /**
@@ -19,10 +18,11 @@ module.exports = {
       item.createdAt = new Date()
       item.updatedAt = new Date()
     })
-    // await queryInterface.bulkInsert('Users', data, {})
+
+    await queryInterface.bulkInsert('Users', data, {})
     try {
-      const users = await User.bulkCreate(users)
-      console.log(users)
+      const users = await User.bulkCreate(data)
+      // console.log(users)
     } catch (error) {
       console.log(error)
     }

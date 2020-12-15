@@ -1,8 +1,6 @@
-'use strict';
+'use strict'
 const { BeratBadan } = require('./')
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Bayi extends Model {
     /**
@@ -13,50 +11,54 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      Bayi.belongsToMany(models.User, {through: models.BayiUser})
+      Bayi.belongsToMany(models.User, { through: models.BayiUser })
       Bayi.belongsTo(models.User, {
-        targetKey: "id",
-        foreignKey: "verifyById"
+        targetKey: 'id',
+        foreignKey: 'verifyById',
       })
       Bayi.hasMany(models.Perkembangan, {
         sourceKey: 'id',
-        foreignKey: 'BayiId'
+        foreignKey: 'BayiId',
       })
     }
-  };
-  Bayi.init({
-    nama: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: {
-          args: true,
-          mgs: "nama tidak boleh kosong"
-        }
-      }
+  }
+  Bayi.init(
+    {
+      nama: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            args: true,
+            mgs: 'nama tidak boleh kosong',
+          },
+        },
+      },
+      tanggal_lahir: DataTypes.DATE,
+      jenis_kelamin: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'jenis kelamin tidak boleh kosong',
+          },
+        },
+      },
+      foto: DataTypes.STRING,
+      lingkar_kepala: DataTypes.DECIMAL,
+      tinggi: DataTypes.DECIMAL,
+      berat_badan: DataTypes.DECIMAL,
+      status_lingkar_kepala: DataTypes.INTEGER,
+      status_tinggi: DataTypes.INTEGER,
+      status_berat_badan: DataTypes.INTEGER,
+      status_kasus: DataTypes.STRING,
+      verify_date: DataTypes.DATE,
+      status_verify: DataTypes.STRING,
+      verifyById: DataTypes.INTEGER,
     },
-    tanggal_lahir: DataTypes.DATE,
-    jenis_kelamin: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: 'jenis kelamin tidak boleh kosong'
-        }
-      }
-    },
-    lingkar_kepala: DataTypes.DECIMAL,
-    tinggi: DataTypes.DECIMAL,
-    berat_badan: DataTypes.DECIMAL,
-    status_lingkar_kepala: DataTypes.INTEGER,
-    status_tinggi: DataTypes.INTEGER,
-    status_berat_badan: DataTypes.INTEGER,
-    status_kasus: DataTypes.STRING,
-    verify_date: DataTypes.DATE,
-    status_verify: DataTypes.STRING,
-    verifyById: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Bayi',
-  });
-  return Bayi;
-};
+    {
+      sequelize,
+      modelName: 'Bayi',
+    }
+  )
+  return Bayi
+}
