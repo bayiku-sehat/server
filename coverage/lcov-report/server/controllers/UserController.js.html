@@ -218,39 +218,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -370,40 +370,40 @@ const { User, Bayi, BayiUser } = require('../models/index')
 const { use } = require('../routes')
 &nbsp;
 class UserController {
-  static async showDokter(req, res, next) {
-    try {
-      const data = await User.findAll({
+<span class="fstat-no" title="function not covered" >  st</span>atic async showDokter(req, res, next) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const data = <span class="cstat-no" title="statement not covered" >await User.findAll({</span>
         include: ['Bayis']
         ,
         where: {
           role: "Dokter"
         }
       })
-      res.status(200).json(data)
+<span class="cstat-no" title="statement not covered" >      res.status(200).json(data)</span>
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      next(error)</span>
     }
   }
-  static async showOrangTua(req, res, next) {
-    try {
-      const data = await User.findAll({
+<span class="fstat-no" title="function not covered" >  st</span>atic async showOrangTua(req, res, next) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const data = <span class="cstat-no" title="statement not covered" >await User.findAll({</span>
         where: {
           role: 'Orang Tua'
         }
       })
-      res.status(200).json(data)
+<span class="cstat-no" title="statement not covered" >      res.status(200).json(data)</span>
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      next(error)</span>
     }
   }
-  static async showPerawat(req, res, next) {
-    try {
-      const data = await User.findAll({
+<span class="fstat-no" title="function not covered" >  st</span>atic async showPerawat(req, res, next) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const data = <span class="cstat-no" title="statement not covered" >await User.findAll({</span>
         where: {
           role: 'Petugas'
         }
       })
-      res.status(200).json(data)
+<span class="cstat-no" title="statement not covered" >      res.status(200).json(data)</span>
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      next(error)</span>
     }
@@ -465,9 +465,9 @@ class UserController {
 <span class="cstat-no" title="statement not covered" >      next(error)</span>
     }
   }
-  static async login(req, res, next) {
-    try {
-      const account = {
+<span class="fstat-no" title="function not covered" >  st</span>atic async login(req, res, next) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const account = <span class="cstat-no" title="statement not covered" >{</span>
         username: req.body.username,
         password: req.body.password,
       }
