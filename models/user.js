@@ -1,6 +1,6 @@
-'use strict'
-const { Model } = require('sequelize')
-const { makeHash } = require('../helpers/hash')
+"use strict";
+const { Model } = require("sequelize");
+const { makeHash } = require("../helpers/hash");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.belongsToMany(models.Bayi, { through: models.BayiUser })
+      User.belongsToMany(models.Bayi, { through: models.BayiUser });
     }
   }
   User.init(
@@ -19,8 +19,30 @@ module.exports = (sequelize, DataTypes) => {
       alamat: DataTypes.STRING,
       usia: DataTypes.INTEGER,
       jenis_kelamin: DataTypes.STRING,
-      username: DataTypes.STRING,
-      password: DataTypes.STRING,
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "username cannot be empty",
+          },
+          notEmpty: {
+            msg: "username cannot be empty",
+          },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "password cannot be empty",
+          },
+          notEmpty: {
+            msg: "password cannot be empty",
+          },
+        },
+      },
       no_hp: DataTypes.INTEGER,
       role: DataTypes.STRING,
       alamat_puskesmas: DataTypes.STRING,
@@ -29,36 +51,36 @@ module.exports = (sequelize, DataTypes) => {
     {
       hooks: {
         beforeCreate(user) {
-          user.password = makeHash(user.password)
+          user.password = makeHash(user.password);
         },
-        beforeValidate(user) {
-          user.password = makeHash(user.password)
-        },
+        // beforeValidate(user) {
+        //   user.password = makeHash(user.password);
+        // },
         beforeUpdate(user) {
-          user.password = makeHash(user.password)
+          user.password = makeHash(user.password);
         },
       },
       sequelize,
-      modelName: 'User',
+      modelName: "User",
     }
-  )
+  );
 
-  User.beforeBulkCreate((users) => {
-    users.map((user) => {
-      let hash = makeHash(user.password)
-      user.password = hash
-      user.username = user.username.toLowerCase()
+  User.beforeBulkCreate(users => {
+    users.map(user => {
+      let hash = makeHash(user.password);
+      user.password = hash;
+      user.username = user.username.toLowerCase();
 
       if (!user.foto) {
-        user.foto = `https://avatars.dicebear.com/api/initials/${user.username}.svg`
+        user.foto = `https://avatars.dicebear.com/api/initials/${user.username}.svg`;
       }
-    })
-  })
+    });
+  });
 
-  User.beforeFind((options) => {
+  User.beforeFind(options => {
     if (options.where && options.where.username) {
-      options.where.username = options.where.username.toLowerCase()
+      options.where.username = options.where.username.toLowerCase();
     }
-  })
-  return User
-}
+  });
+  return User;
+};

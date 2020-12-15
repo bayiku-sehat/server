@@ -89,78 +89,90 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span></td><td class="text"><pre class="prettyprint lang-js">'use strict'
-const BayiController = require('../controllers/BayiController')
-const UserController = require('../controllers/UserController')
-const PerkembanganController = require('../controllers/PerkembanganController')
-const DataWHOController = require('../controllers/DataWHOController')
-const authentication = require('../middlewares/auth')
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+const BayiController = require("../controllers/BayiController");
+const UserController = require("../controllers/UserController");
+const PerkembanganController = require("../controllers/PerkembanganController");
+const DataWHOController = require("../controllers/DataWHOController");
+const authentication = require("../middlewares/auth");
 &nbsp;
-const router = require('express').Router()
+const router = require("express").Router();
 &nbsp;
-router.get('/lingkar-kepala', DataWHOController.lingkarKepala)
-router.get('/tinggi', DataWHOController.tinggiBadan)
-router.get('/berat-badan', DataWHOController.beratBadan)
+router.get("/lingkar-kepala", DataWHOController.lingkarKepala);
+router.get("/tinggi", DataWHOController.tinggiBadan);
+router.get("/berat-badan", DataWHOController.beratBadan);
 &nbsp;
-router.post('/login', UserController.login)
-router.get('/user/dokter', UserController.showDokter)
-router.get('/user/orangtua', UserController.showOrangTua)
-router.get('/user/petugas', UserController.showPerawat)
-router.post('/user', UserController.add)
-router.use(authentication)
-router.get('/user-detail', UserController.showDetail)
-router.put('/user/:userId', UserController.editUser)
-router.delete('/user/:userId', UserController.deleteUser)
-router.post('/user/bayi/:bayiId', UserController.userGetBayi)
+router.post("/login", UserController.login);
+router.get("/user/dokter", UserController.showDokter);
+router.get("/user/orangtua", UserController.showOrangTua);
+router.get("/user/petugas", UserController.showPerawat);
+router.post("/user", UserController.add);
+router.use(authentication);
+router.get("/user-detail", UserController.showDetail);
+router.put("/user/:userId", UserController.editUser);
+router.delete("/user/:userId", UserController.deleteUser);
+router.post("/user/bayi/:bayiId", UserController.userGetBayi);
 &nbsp;
-router.get('/bayi', BayiController.show)
-router.get('/bayi/:bayiId', BayiController.showDetail)
-router.put('/bayi/:bayiId', BayiController.verifyBayi)
-router.post('/bayi', BayiController.add)
-router.delete('/bayi/:bayiId', BayiController.deleteBayi)
+router.get("/bayi", BayiController.show);
+router.get("/bayi/:bayiId", BayiController.showDetail);
+router.put("/bayi/:bayiId", BayiController.verifyBayi);
+router.post("/bayi", BayiController.add);
+router.delete("/bayi/:bayiId", BayiController.deleteBayi);
 &nbsp;
-router.post('/bayi/:bayiId/perkembangan', PerkembanganController.addPerkembangan)
+router.post(
+  "/bayi/:bayiId/perkembangan",
+  PerkembanganController.addPerkembangan
+);
 &nbsp;
-module.exports = router</pre></td></tr></table></pre>
+module.exports = router;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Dec 15 2020 15:03:50 GMT+0700 (Western Indonesia Time)
+                at Wed Dec 16 2020 01:43:52 GMT+0700 (Western Indonesia Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

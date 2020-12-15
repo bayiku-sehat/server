@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jest --forceExit --runInBand --detectOpenHandles --coverage"
+    "test": "jest --forceExit --runInBand --detectOpenHandles --verbose --coverage"
   },
   "repository": {
     "type": "git",
