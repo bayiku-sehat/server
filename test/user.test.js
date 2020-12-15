@@ -127,7 +127,7 @@ describe("Test success CRUD User", () => {
             .set('Accept', 'application/json')
             .then(response => {
                 const { status, body } = response
-                console.log(body)
+                console.log(response.body, "<<<<< ini body")
                 expect(status).toBe(200)
                 expect(body).toHaveProperty('access_token', expect.any(String))
                 done()

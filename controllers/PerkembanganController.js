@@ -1,6 +1,5 @@
 'use strict'
 const { Bayi, TinggiBadan, BeratBadan, LingkarKepala, Perkembangan } = require('../models/index')
-const user = require('../models/user')
 
 class PerkembanganController {
   static async addPerkembangan(req, res, next) {
