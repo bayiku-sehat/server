@@ -23,16 +23,18 @@ class BayiController {
       next(error)
     }
   }
-  static async add(req, res, next) {
+  static async addBayi(req, res, next) {
     try {
       let params = {
         nama: req.body.nama,
         tanggal_lahir: new Date(req.body.tanggal_lahir),
         jenis_kelamin: req.body.jenis_kelamin,
         lingkar_kepala: +req.body.lingkar_kepala,
-        tinggi: +req.body.tinggi_badan,
-        berat_badan: +req.body.berat_badan
+        tinggi: +req.body.tinggi,
+        berat_badan: +req.body.berat_badan,
+        foto: req.body.foto
       }
+      console.log(params, "BABY")
       const month = Math.round((new Date() - params.tanggal_lahir) / 2669599261)
       const whoTinggiBadan = await TinggiBadan.findOne({
         where: {

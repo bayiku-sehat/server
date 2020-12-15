@@ -130,7 +130,7 @@ class PerkembanganController {
   }
   static async addBayiToDokter(req, res, next) {
     try {
-      const dokterId = 1
+      const dokterId = req.userData.id
       const bayiId = req.params.bayi_id
       const pasien = {
         Bayi_id: bayiId,

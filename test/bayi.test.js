@@ -2,20 +2,20 @@ const request = require('supertest')
 const app = require('../app')
 const { User, Bayi } = require('../models/index')
 const { signToken } = require('../helpers/jwt')
-const { makeHash } = require('../helpers/hash')
 
-const user = { username: "Maryam", password: makeHash("Maryammaryam"), role: "Orang Tua" }
-const user2 = { username: "Ani", password: makeHash("Aniani"), role: "Petugas" }
+const user = { username: ("Maryam").toLocaleLowerCase(), password: "Maryammaryam", role: "Orang Tua" }
+const user2 = { username: ("Ani").toLocaleLowerCase(), password: "Aniani", role: "Petugas" }
 const bayi = {
     nama: "Marni",
     tanggal_lahir: "12-12-20",
     jenis_kelamin: "Perempuan",
     lingkar_kepala: 32.7,
     tinggi: 47.3,
-    berat_badan: 3.5
+    berat_badan: 3.5,
+    foto:"foto"
 }
 
-let bayiBaru = 0
+let bayiBaru = ''
 let access_token = ''
 let token = '';
 let petugas = '';
@@ -23,27 +23,30 @@ let orangTua = '';
 
 beforeAll((done) => {
     User.create(user)
-        .then((data) => {
-            const user = {
-                id: data.id,
-                username: data.username
-            }
-            access_token = signToken(user)
+    .then((data) => {
+        console.log(data, "datatest")
+        const userInput = {
+            id: data.id,
+            username: data.username.toLowerCase(),
+            role: data.role
+        }
+        access_token = signToken(userInput)
             orangTua = data
             return User.create(user2)
         })
         .then((data) => {
-            const user2 = {
+            const user2Input = {
                 id: data.id,
-                username: data.username
+                username: data.username,
+                role: data.role
             }
             petugas = data
-            token = signToken(user2)
+            
+            token = signToken(user2Input)
             return Bayi.create(bayi)
         })
         .then((data) => {
             bayiBaru = data
-
             return done()
         })
         .catch(err => {
@@ -51,22 +54,22 @@ beforeAll((done) => {
         })
 })
 
-// afterAll((done) => {
-//     User.destroy({
-//         truncate: true
-//     })
-//         .then(_ => {
-//             return Bayi.destroy({
-//                 truncate: true
-//             })
-//         })
-//         .then(_ => {
-//             return done()
-//         })
-//         .catch(err => {
-//             return done(err)
-//         })
-// })
+afterAll((done) => {
+    User.destroy({
+        truncate: true
+    })
+        .then(_ => {
+            return Bayi.destroy({
+                truncate: true
+            })
+        })
+        .then(_ => {
+            return done()
+        })
+        .catch(err => {
+            return done(err)
+        })
+})
 
 // Succesfull create CRUD 
 
@@ -74,14 +77,6 @@ describe("Test success CRUD Bayi", () => {
     it('Test success Get Bayi', (done) => {
         request(app)
             .get('/bayi')
-            .send({
-                nama: "Marni",
-                tanggal_lahir: 12 - 12 - 2020,
-                jenis_kelamin: "Perempuan",
-                lingkar_kepala: 32.7,
-                tinggi: 47.3,
-                berat_badan: 3.5
-            })
             .set("access_token", access_token)
             .then((response) => {
                 let { body, status } = response
@@ -104,6 +99,7 @@ describe("Test Success CRUD Bayi", () => {
             .set('Accept', 'application/json')
             .then((response) => {
                 let { body, status } = response
+                console.log(body, "sistar")
                 expect(status).toBe(201)
                 expect(response).toHaveProperty("body", expect.any(Object))
                 done()

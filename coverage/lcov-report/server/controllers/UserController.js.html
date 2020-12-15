@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.31% </span>
+                <span class="strong">47.17% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/52</span>
+                <span class='fraction'>25/53</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>3/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.44% </span>
+                <span class="strong">55.56% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/9</span>
+                <span class='fraction'>5/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.31% </span>
+                <span class="strong">47.17% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/52</span>
+                <span class='fraction'>25/53</span>
             </div>
         
             
@@ -206,10 +206,15 @@
 <a name='L147'></a><a href='#L147'>147</a>
 <a name='L148'></a><a href='#L148'>148</a>
 <a name='L149'></a><a href='#L149'>149</a>
-<a name='L150'></a><a href='#L150'>150</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -251,8 +256,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -262,8 +267,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -321,10 +326,13 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -359,6 +367,7 @@
 const { compareHash } = require('../helpers/hash')
 const { signToken } = require('../helpers/jwt')
 const { User, Bayi, BayiUser } = require('../models/index')
+const { use } = require('../routes')
 &nbsp;
 class UserController {
   static async showDokter(req, res, next) {
@@ -399,9 +408,9 @@ class UserController {
 <span class="cstat-no" title="statement not covered" >      next(error)</span>
     }
   }
-<span class="fstat-no" title="function not covered" >  st</span>atic async add(req, res, next) {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      let params = <span class="cstat-no" title="statement not covered" >{</span>
+  static async add(req, res, next) {
+    try {
+      let params = {
         nama: req.body.nama,
         alamat: req.body.alamat,
         usia: req.body.usia,
@@ -411,8 +420,8 @@ class UserController {
         password: req.body.password,
         role: req.body.role
       }
-      const data = <span class="cstat-no" title="statement not covered" >await User.create(params)</span>
-<span class="cstat-no" title="statement not covered" >      res.status(201).json(data)</span>
+      const data = await User.create(params)
+      res.status(201).json(data)
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      next(error)</span>
     }
@@ -469,11 +478,14 @@ class UserController {
       })
       if (!user) {
         res.status(403).json({ msg: 'username dan password salah' })
-      } else if (!compareHash(account.password, user.password)) {
+      } else <span class="missing-if-branch" title="else path not taken" >E</span>if (!compareHash(account.password, user.password)) {
         res.status(403).json({ msg: 'username dan password salah' })
       } else {
-        const access_token = signToken({ id: user.id, username: user.username, role: user.role })
-        res.status(200).json({ access_token })
+        const access_token = <span class="cstat-no" title="statement not covered" >signToken({ id: user.id, username: user.username, role: user.role })</span>
+<span class="cstat-no" title="statement not covered" >        res.status(200).json({</span>
+          access_token: access_token,
+          role: user.role
+        })
       }
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      next(error)</span>
@@ -486,7 +498,7 @@ class UserController {
     const bayiId = <span class="cstat-no" title="statement not covered" >req.params.bayiId</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      if (req.userData.role !== "Dokter") {</span>
-<span class="cstat-no" title="statement not covered" >        res.status(403).json({msg: "Anda tidak berhak menangani pasien."})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(403).json({ msg: "Anda tidak berhak menangani pasien." })</span>
       } else {
         const getBayi = <span class="cstat-no" title="statement not covered" >await Bayi.findByPk(bayiId)</span>
         const data = <span class="cstat-no" title="statement not covered" >{</span>
@@ -511,7 +523,7 @@ module.exports = UserController
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Dec 15 2020 15:03:50 GMT+0700 (Western Indonesia Time)
+                at Tue Dec 15 2020 22:02:50 GMT+0700 (Western Indonesia Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

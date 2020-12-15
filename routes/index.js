@@ -23,9 +23,9 @@ router.delete('/user/:userId', UserController.deleteUser)
 router.post('/user/bayi/:bayiId', UserController.userGetBayi)
 
 router.get('/bayi', BayiController.show)
+router.post('/bayi', BayiController.addBayi)
 router.get('/bayi/:bayiId', BayiController.showDetail)
 router.put('/bayi/:bayiId', BayiController.verifyBayi)
-router.post('/bayi', BayiController.add)
 router.delete('/bayi/:bayiId', BayiController.deleteBayi)
 
 router.post(

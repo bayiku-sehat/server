@@ -48,7 +48,6 @@ module.exports = (sequelize, DataTypes) => {
       let hash = makeHash(user.password)
       user.password = hash
       user.username = user.username.toLowerCase()
-
       if (!user.foto) {
         user.foto = `https://avatars.dicebear.com/api/initials/${user.username}.svg`
       }
