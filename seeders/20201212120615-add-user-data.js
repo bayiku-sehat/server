@@ -18,8 +18,8 @@ module.exports = {
       item.createdAt = new Date()
       item.updatedAt = new Date()
     })
+    // await queryInterface.bulkInsert('Users', data, {})
 
-    await queryInterface.bulkInsert('Users', data, {})
     try {
       const users = await User.bulkCreate(data)
       // console.log(users)
