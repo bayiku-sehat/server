@@ -1,5 +1,5 @@
 'use strict'
-const { Bayi, TinggiBadan, BeratBadan, LingkarKepala, Perkembangan } = require('../models/index')
+const { Bayi, TinggiBadan, BeratBadan, LingkarKepala, Perkembangan, BayiUser } = require('../models/index')
 
 class PerkembanganController {
   static async addPerkembangan(req, res, next) {
@@ -103,9 +103,10 @@ class PerkembanganController {
       const newData = await Bayi.update(updateBayi, {
         where: {
           id: bayiId
-        }
+        },
+        returning: true
       })
-      res.status(201).json(newData)
+      res.status(201).json(newData[1][0])
     } catch (error) {
       next(error)
     }
@@ -115,7 +116,7 @@ class PerkembanganController {
     try {
       const deletePerkembangan = await Perkembangan.destroy({
         where: {
-          id: req.params.perkembangan_id
+          id: req.params.perkembanganId,
         }
       })
       if (deletePerkembangan === 1) {
@@ -124,19 +125,19 @@ class PerkembanganController {
         res.status(400).json({ message: "Data perkembangan bayi tidak ditemukan." })
       }
     } catch (error) {
+      console.log(error)
       next(error)
     }
   }
   static async addBayiToDokter(req, res, next) {
     try {
       const dokterId = req.userData.id
-      const bayiId = req.params.bayi_id
+      const bayiId = req.params.bayiId
       const pasien = {
-        Bayi_id: bayiId,
-        status: req.body.status,
-        DokterId: dokterId
+        BayiId: bayiId,
+        UserId: dokterId
       }
-      const data = await Pasien(pasien)
+      const data = await BayiUser.create(pasien)
       res.status(201).json(data)
     } catch (error) {
       next(error)
@@ -144,10 +145,11 @@ class PerkembanganController {
   }
   static async deleteBayiInDokter(req, res, next) {
     try {
-      const bayiId = req.updateBayi.bayi_id
-      const data = await Pasien.destroy({
+      const bayiId = req.params.bayiId
+      console.log(bayiId, "SSSSSS")
+      const data = await BayiUser.destroy({
         where: {
-          id: bayiId
+          BayiId: bayiId,
         }
       })
       res.status(200).json({ msg: "Data perkembangan bayi sudah dihapus." })

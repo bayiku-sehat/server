@@ -32,5 +32,7 @@ router.post(
   '/bayi/:bayiId/perkembangan',
   PerkembanganController.addPerkembangan
 )
-
+router.delete('/bayi/perkembangan/:perkembanganId', PerkembanganController.deletePerkembangan)
+router.post('/dokter/bayi/:bayiId/', PerkembanganController.addBayiToDokter)
+router.delete('/dokter/bayi/:bayiId', PerkembanganController.deleteBayiInDokter)
 module.exports = router

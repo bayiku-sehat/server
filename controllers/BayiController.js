@@ -34,7 +34,6 @@ class BayiController {
         berat_badan: +req.body.berat_badan,
         foto: req.body.foto
       }
-      console.log(params, "BABY")
       const month = Math.round((new Date() - params.tanggal_lahir) / 2669599261)
       const whoTinggiBadan = await TinggiBadan.findOne({
         where: {
@@ -132,7 +131,7 @@ class BayiController {
         res.status(200).json(updateData)
       }
     } catch (error) {
-      next(error)
+      res.status(400).json({msg: "fail not found"})
     }
   }
   static async deleteBayi(req, res, next) {

@@ -24,7 +24,6 @@ let orangTua = '';
 beforeAll((done) => {
     User.create(user)
     .then((data) => {
-        console.log(data, "datatest")
         const userInput = {
             id: data.id,
             username: data.username.toLowerCase(),
@@ -91,6 +90,32 @@ describe("Test success CRUD Bayi", () => {
 })
 
 describe("Test Success CRUD Bayi", () => {
+    it("Test null value Bayi ", (done) => {
+        request(app)
+            .post('/bayi')
+            .set("access_token", access_token)
+            .send({
+                nama: "Marni",
+                tanggal_lahir: "12-12-20",
+                jenis_kelamin: "Perempuan",
+                lingkar_kepala: null,
+                tinggi: null,
+                berat_badan: null,
+                foto:"foto"
+            })
+            .set('Accept', 'application/json')
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(201)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+})
+describe("Test Success CRUD Bayi", () => {
     it("Test success Post Bayi ", (done) => {
         request(app)
             .post('/bayi')
@@ -99,7 +124,6 @@ describe("Test Success CRUD Bayi", () => {
             .set('Accept', 'application/json')
             .then((response) => {
                 let { body, status } = response
-                console.log(body, "sistar")
                 expect(status).toBe(201)
                 expect(response).toHaveProperty("body", expect.any(Object))
                 done()
@@ -148,6 +172,22 @@ describe("Test Success CRUD Bayi", () => {
             .then((response) => {
                 let { body, status } = response
                 expect(status).toBe(200)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+})
+describe("Test Success CRUD Bayi", () => {
+    it("Test failed id bayi Put Bayi ", (done) => {
+        request(app)
+            .put(`/bayi/${1000000000000000000}`)
+            .set("access_token", token)
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(400)
                 expect(response).toHaveProperty("body", expect.any(Object))
                 done()
             })
@@ -236,6 +276,7 @@ describe("Test Failed CRUD Bayi", () => {
             })
     })
 })
+
 describe("Test Success CRUD Bayi", () => {
     it("Test failed validation Put Bayi ", (done) => {
         request(app)
@@ -274,7 +315,7 @@ describe("Test Failed CRUD Bayi", () => {
 })
 
 describe("Test Failed CRUD Bayi", () => {
-    it("Test failed id undefined", (done) => {
+    it("Test failed failed delete", (done) => {
         request(app)
             .delete(`/bayi/${bayiBaru.id}`)
             .set("access_token", access_token)

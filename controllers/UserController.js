@@ -127,7 +127,11 @@ class UserController {
     }
   }
   static async showDetail(req, res, next) {
-    res.status(200).json(req.userData)
+   try {
+     const data = await User.findByPk(+req.userData.id)
+   } catch(err) {
+     next(err)
+   }
   }
   static async userGetBayi(req, res, next) {
     const bayiId = req.params.bayiId

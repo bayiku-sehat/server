@@ -14,9 +14,18 @@ module.exports = (sequelize, DataTypes) => {
   Perkembangan.init(
     {
       // tanggal_pemeriksaan: DataTypes.DATE,
-      lingkar_kepala: DataTypes.DECIMAL,
-      tinggi: DataTypes.DECIMAL,
-      berat_badan: DataTypes.DECIMAL,
+      lingkar_kepala: {
+        type: DataTypes.DECIMAL,
+        notNull: true
+      },
+      tinggi: {
+        type: DataTypes.DECIMAL,
+        notNull: true
+      },
+      berat_badan: {
+        type: DataTypes.DECIMAL,
+        notNull: true
+      },
       status_lingkar_kepala: DataTypes.INTEGER,
       status_tinggi: DataTypes.INTEGER,
       status_berat_badan: DataTypes.INTEGER,
