@@ -1,18 +1,24 @@
-'use strict';
+'use strict'
+
 const fs = require('fs')
+const { User } = require('../models')
+
+let data = JSON.parse(fs.readFileSync('./data/user.json', 'utf8'))
+
+data.forEach((item) => {
+  item.createdAt = new Date()
+  item.updatedAt = new Date()
+})
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-  const data = fs.readFileSync('./data/user.json','utf8')
-  await queryInterface.bulkInsert('Users',JSON.parse(data), {})
+    // await queryInterface.bulkInsert('Users', data, {})
+    try {
+      const user = await User.bulkCreate(data)
+      console.log('user:', user)
+    } catch (error) {
+      console.log(error)
+    }
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -22,6 +28,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Users', null, {});
-  }
-};
+    await queryInterface.bulkDelete('Users', null, {})
+  },
+}

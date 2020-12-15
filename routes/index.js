@@ -11,7 +11,7 @@ router.get('/lingkar-kepala', DataWHOController.lingkarKepala)
 router.get('/tinggi', DataWHOController.tinggiBadan)
 router.get('/berat-badan', DataWHOController.beratBadan)
 
-router.get('/login', UserController.login)
+router.post('/login', UserController.login)
 router.get('/user/dokter', UserController.showDokter)
 router.get('/user/orangtua', UserController.showOrangTua)
 router.get('/user/perawat', UserController.showPerawat)
@@ -28,6 +28,9 @@ router.put('/bayi/:bayiId', BayiController.verifyBayi)
 router.post('/bayi', BayiController.add)
 router.delete('/bayi/:bayiId', BayiController.deleteBayi)
 
-router.post('/bayi/:bayiId/perkembangan', PerkembanganController.addPerkembangan)
+router.post(
+  '/bayi/:bayiId/perkembangan',
+  PerkembanganController.addPerkembangan
+)
 
 module.exports = router
