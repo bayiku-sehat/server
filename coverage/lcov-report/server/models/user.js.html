@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.16% </span>
+                <span class="strong">61.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/19</span>
+                <span class='fraction'>11/18</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/8</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.16% </span>
+                <span class="strong">61.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/19</span>
+                <span class='fraction'>11/18</span>
             </div>
         
             
@@ -120,7 +120,29 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -151,10 +173,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -183,9 +227,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict'
-const { Model } = require('sequelize')
-const { makeHash } = require('../helpers/hash')
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+const { Model } = require("sequelize");
+const { makeHash } = require("../helpers/hash");
 module.exports = (sequelize, DataTypes) =&gt; {
   class User extends Model {
     /**
@@ -195,7 +239,7 @@ module.exports = (sequelize, DataTypes) =&gt; {
      */
     static associate(models) {
       // define association here
-      User.belongsToMany(models.Bayi, { through: models.BayiUser })
+      User.belongsToMany(models.Bayi, { through: models.BayiUser });
     }
   }
   User.init(
@@ -204,8 +248,30 @@ module.exports = (sequelize, DataTypes) =&gt; {
       alamat: DataTypes.STRING,
       usia: DataTypes.INTEGER,
       jenis_kelamin: DataTypes.STRING,
-      username: DataTypes.STRING,
-      password: DataTypes.STRING,
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "username cannot be empty",
+          },
+          notEmpty: {
+            msg: "username cannot be empty",
+          },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "password cannot be empty",
+          },
+          notEmpty: {
+            msg: "password cannot be empty",
+          },
+        },
+      },
       no_hp: DataTypes.INTEGER,
       role: DataTypes.STRING,
       alamat_puskesmas: DataTypes.STRING,
@@ -214,19 +280,19 @@ module.exports = (sequelize, DataTypes) =&gt; {
     {
       hooks: {
         beforeCreate(user) {
-          user.password = makeHash(user.password)
+          user.password = makeHash(user.password);
         },
-        beforeValidate(user) {
-          user.password = makeHash(user.password)
-        },
+        // beforeValidate(user) {
+        //   user.password = makeHash(user.password);
+        // },
 <span class="fstat-no" title="function not covered" >        be</span>foreUpdate(user) {
-<span class="cstat-no" title="statement not covered" >          user.password = makeHash(user.password)</span>
+<span class="cstat-no" title="statement not covered" >          user.password = makeHash(user.password);</span>
         },
       },
       sequelize,
-      modelName: 'User',
+      modelName: "User",
     }
-  )
+  );
 &nbsp;
   User.beforeBulkCreate(<span class="fstat-no" title="function not covered" >(u</span>sers) =&gt; {
 <span class="cstat-no" title="statement not covered" >    users.map(<span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
@@ -234,18 +300,18 @@ module.exports = (sequelize, DataTypes) =&gt; {
 <span class="cstat-no" title="statement not covered" >      user.password = hash</span>
 <span class="cstat-no" title="statement not covered" >      user.username = user.username.toLowerCase()</span>
 <span class="cstat-no" title="statement not covered" >      if (!user.foto) {</span>
-<span class="cstat-no" title="statement not covered" >        user.foto = `https://avatars.dicebear.com/api/initials/${user.username}.svg`</span>
+<span class="cstat-no" title="statement not covered" >        user.foto = `https://avatars.dicebear.com/api/initials/${user.username}.svg`;</span>
       }
-    })
-  })
+    });
+  });
 &nbsp;
-  User.beforeFind((options) =&gt; {
+  User.beforeFind(options =&gt; {
     if (options.where &amp;&amp; options.where.username) {
-      options.where.username = options.where.username.toLowerCase()
+      options.where.username = options.where.username.toLowerCase();
     }
-  })
-  return User
-}
+  });
+  return User;
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -253,7 +319,7 @@ module.exports = (sequelize, DataTypes) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 16 2020 01:39:56 GMT+0700 (Western Indonesia Time)
+                at Wed Dec 16 2020 01:51:27 GMT+0700 (Western Indonesia Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

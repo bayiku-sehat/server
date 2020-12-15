@@ -1,212 +1,316 @@
-const request = require('supertest')
-const app = require('../app')
-const { User, Bayi } = require('../models/index')
-const { signToken } = require('../helpers/jwt')
-const { makeHash } = require('../helpers/hash')
+const request = require("supertest");
+const { response, use } = require("../app");
+const app = require("../app");
+const { User, Bayi, Perkembangan } = require("../models/index");
+const { sequelize } = require("../models");
+const { queryInterface } = sequelize;
+const { signToken } = require("../helpers/jwt");
+let id;
+let access_token;
 
-let user = { username: "maryam", password: "Maryammaryam", role: "Orang Tua" }
-let user2 = { username: "ani", password: "Aniani", role: "Petugas" }
-const bayi = {
-    nama: "Marni",
-    tanggal_lahir: "12-12-20",
-    jenis_kelamin: "Perempuan",
-    lingkar_kepala: 32.7,
-    tinggi: 47.3,
-    berat_badan: 3.5
-}
-let userBaru = {
-    username: user.username,
-    password: makeHash(user.password),
-    role: user.role
-}
-let bayiBaru = 0
-let access_token = ''
-let token = '';
-let petugas = '';
-let orangTua = '';
-beforeAll((done) => {
-    User.create(userBaru)
-    .then((data) => {
-        const userInput = {
-            id: data.id,
-            username: data.username.toLowerCase(),
-            role: data.role
-        }
-        access_token = signToken(userInput)
-            orangTua = data
-            return User.create(user2)
-        })
-        .then((data) => {
-            const user2Input = {
-                id: data.id,
-                username: data.username,
-                role: data.role
-            }
-            petugas = data
-            token = signToken(user2Input)
-            return Bayi.create(bayi)
-        })
-        .then((data) => {
-            bayiBaru = data
+describe("Test success CRUD User", () => {
+  it("Test success Get dokter", done => {
+    request(app)
+      .get("/user/dokter")
+      .then(response => {
+        let { body, status } = response;
+        expect(status).toBe(200);
+        expect(response).toHaveProperty("body", expect.any(Object));
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+});
 
-            return done()
+describe("Test success CRUD User", () => {
+  it("Test success Get orang tua", done => {
+    request(app)
+      .get("/user/orangtua")
+      .then(response => {
+        let { body, status } = response;
+        expect(status).toBe(200);
+        expect(response).toHaveProperty("body", expect.any(Object));
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+});
+
+describe("Test success CRUD User", () => {
+  it("Test success Get petugas", done => {
+    request(app)
+      .get("/user/petugas")
+      .then(response => {
+        let { body, status } = response;
+        expect(status).toBe(200);
+        expect(response).toHaveProperty("body", expect.any(Object));
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+});
+
+describe("User Routes Test", () => {
+  const userData = {
+    username: "ajeng",
+    password: "ajeng",
+    nama: "Fitri",
+    alamat: "Jakarta",
+    usia: 25,
+    no_hp: 685212345,
+    jenis_kelamin: "perempuan",
+    role: "Dokter",
+  };
+
+  const userData2 = {
+    username: "aulia",
+    password: "aulia",
+    nama: "Shelli",
+    alamat: "Jakarta",
+    usia: 26,
+    no_hp: 685212347,
+    jenis_kelamin: "perempuan",
+    role: "Orang Tua",
+  };
+
+  describe("POST /user - create new user", () => {
+    beforeAll(done => {
+      User.create(userData2)
+        .then(_ => {
+          done();
         })
         .catch(err => {
-            return done(err)
+          done(err);
+        });
+    });
+
+    afterAll(done => {
+      queryInterface
+        .bulkDelete("Users", {})
+        .then(() => done())
+        .catch(err => done(err));
+    });
+
+    test("201 Success user - should create new User", done => {
+      request(app)
+        .post("/user")
+        .send(userData)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(201);
+          expect(body).toHaveProperty("id", expect.any(Number));
+          expect(body).toHaveProperty("username", userData.username);
+          done();
+        });
+    });
+
+    test("400 Failed user - should return error if username is null", done => {
+      request(app)
+        .post("/user")
+        .send({
+          password: "qweqwe",
         })
-})
+        .then(response => {
+          const { body, status } = response;
+          console.log(body, "dsfsdfds");
+          expect(status).toBe(400);
+          expect(body).toHaveProperty("message", "field must be not empty");
+          done();
+        });
+    });
 
-afterAll((done) => {
-    User.destroy({
-        truncate: true
-    })
-        .then(_ => {
-            return Bayi.destroy({
-                truncate: true
-            })
+    test("400 Failed user - should return error if username is empty string", done => {
+      request(app)
+        .post("/user")
+        .send({
+          username: "",
+          password: "qweqwe",
         })
-        .then(_ => {
-            return done()
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(400);
+          expect(body).toHaveProperty("message", "field must be not empty");
+          done();
+        });
+    });
+
+    test("400 Failed user - should return error if password is null", done => {
+      request(app)
+        .post("/user")
+        .send({
+          username: "lola",
         })
-        .catch(err => {
-            return done(err)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(400);
+          expect(body).toHaveProperty("message", "field must be not empty");
+          done();
+        });
+    });
+
+    test("400 Failed user - should return error if password is empty", done => {
+      request(app)
+        .post("/user")
+        .send({
+          username: "lala",
+          password: "",
         })
-})
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(400);
+          expect(body).toHaveProperty("message", "field must be not empty");
+          done();
+        });
+    });
 
-describe("Test success CRUD User", () => {
-    it('Test success Get dokter', (done) => {
-        request(app)
-            .get('/user/dokter')
-            .then((response) => {
-                let { body, status } = response
-                expect(status).toBe(200)
-                expect(response).toHaveProperty("body", expect.any(Object))
-                done()
-            })
-            .catch(err => {
-                done(err)
-            })
-    })
-})
+    test("400 Failed user - should return error if username is already used", done => {
+      request(app)
+        .post("/user")
+        .send({
+          username: "ajeng",
+          password: "qweqwes",
+        })
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(400);
+          expect(body).toHaveProperty("message", "user already exists");
+          done();
+        });
+    });
+    describe("POST /login - user authentication process", () => {
+      beforeAll(done => {
+        User.create({
+          username: "farah",
+          password: "farah",
+        })
+          .then(_ => {
+            done();
+          })
+          .catch(err => {
+            done(err);
+          });
+      });
 
-describe("Test success CRUD User", () => {
-    it('Test success Get orang tua', (done) => {
-        request(app)
-            .get('/user/orangtua')
-            .then((response) => {
-                let { body, status } = response
-                expect(status).toBe(200)
-                expect(response).toHaveProperty("body", expect.any(Object))
-                done()
-            })
-            .catch(err => {
-                done(err)
-            })
-    })
-})
+      afterAll(done => {
+        queryInterface
+          .bulkDelete("Users", {})
+          .then(() => done())
+          .catch(err => done(err));
+      });
 
-describe("Test success CRUD User", () => {
-    it('Test success Get petugas', (done) => {
+      test("200 Success login - should return access_token", done => {
         request(app)
-            .get('/user/petugas')
-            .then((response) => {
-                let { body, status } = response
-                expect(status).toBe(200)
-                expect(response).toHaveProperty("body", expect.any(Object))
-                done()
-            })
-            .catch(err => {
-                done(err)
-            })
-    })
-})
+          .post("/login")
+          .send({
+            username: "farah",
+            password: "farah",
+          })
+          .then(response => {
+            const { body, status } = response;
+            expect(status).toBe(200);
+            expect(body).toHaveProperty("access_token", expect.any(String));
+            done();
+          });
+      });
 
-describe("Test success CRUD User", () => {
-    it('Test success login', (done) => {
+      test("400 Failed login - should return access_token", done => {
         request(app)
-            .post('/login')
-            .send({
-                username: "maryam",
-                password: "Maryammaryam"
-            })
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(200)
-                expect(body).toHaveProperty('access_token', expect.any(String))
-                done()
-            })
-            .catch(err => {
-                done(err)
-            })
-    })
-})
-describe("Test success CRUD User", () => {
-    it('Test login failed username', (done) => {
+          .post("/login")
+          .send({
+            username: "d@mailssss.com",
+            password: "farah",
+          })
+          .then(response => {
+            const { body, status } = response;
+            expect(status).toBe(403);
+            expect(body).toHaveProperty(
+              "message",
+              "username dan password salah"
+            );
+            done();
+          });
+      });
+      test("400 Failed login - should return access_token", done => {
         request(app)
-            .post('/login')
-            .send({
-                username: "marya",
-                password: "Maryammaryam"
-            })
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(403)
-                expect(body).toHaveProperty('msg', expect.any(String))
-                done()
-            })
-            .catch(err => {
-                done(err)
-            })
-    })
-})
-describe("Test success CRUD User", () => {
-    it('Test login failed password', (done) => {
-        request(app)
-            .post('/login')
-            .send({
-                username: "maryam",
-                password: "Maryammarya"
-            })
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(403)
-                expect(body).toHaveProperty('msg', expect.any(String))
-                done()
-            })
-            .catch(err => {
-                done(err)
-            })
-    })
-})
-describe("Test Success CRUD Bayi", () => {
-    const user = {
-        nama: 'Melody',
-        alamat: 'Jakarta',
-        usia: 25,
-        jenis_kelamin: 'Perempuan',
-        username: 'Melody',
-        password: '123',
-        no_hp: 82512,
-        role: 'Orang Tua',
-        foto:
-          'https://cdn1-production-images-kly.akamaized.net/CASsRi73DznnCPVGy_MO48zCeMA=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2786209/original/029379000_1556018610-Melody_Nurramdhani.jpg',
-      }
-    it("Test success Post users ", (done) => {
-        request(app)
-            .post('/user')
-            .send(user)
-            .set('Accept', 'application/json')
-            .then((response) => {
-                let { body, status } = response
-                expect(status).toBe(201)
-                expect(response).toHaveProperty("body", expect.any(Object))
-                done()
-            })
-            .catch(err => {
-                done(err)
-            })
-    })
-})
+          .post("/login")
+          .send({
+            username: "farah",
+            password: "faraha",
+          })
+          .then(response => {
+            const { body, status } = response;
+            expect(status).toBe(403);
+            expect(body).toHaveProperty(
+              "message",
+              "username dan password salah"
+            );
+            done();
+          });
+      });
+      //   describe("PUT / user", () => {
+      //     beforeAll(done => {
+      //       User.create(userData)
+      //         .then(() => {
+      //           console.log("yayayya");
+      //           return User.findOne({
+      //             where: {
+      //               username: "ajeng",
+      //             },
+      //           });
+      //         })
+      //         .then(user => {
+      //           id = user.id;
+      //           console.log(id, "id", user);
+      //           access_token = signToken({
+      //             id: user.id,
+      //             username: user.username,
+      //             role: user.role,
+      //           });
+      //           console.log(access_token, "hjhjhjhjh");
+      //           done();
+      //         })
+      //         .catch(err => {
+      //           done(err);
+      //         });
+      //     });
+      //     afterAll(done => {
+      //       queryInterface
+      //         .bulkDelete("Users", {})
+      //         .then(() => done())
+      //         .catch(err => done(err));
+      //     });
+      //     test("sukses edit", done => {
+      //       request(app)
+      //         .put(`/user/${id}`)
+      //         // .set("access_token", access_token)
+      //         .send({
+      //           username: "ajengputri",
+      //           password: "ajeng",
+      //           nama: "Fitri",
+      //           alamat: "Jakarta",
+      //           usia: 25,
+      //           no_hp: 685212345,
+      //           jenis_kelamin: "perempuan",
+      //           role: "Dokter",
+      //         })
+      //         .then(response => {
+      //           const { body, status } = response;
+      //           console.log(access_token);
+      //           //expect(status).toBe(200);
+      //           expect(response).toHaveProperty("body", expect.any(Object));
+      //           done();
+      //         })
+      //         .catch(err => {
+      //           done(err);
+      //         });
+      //     });
+      //   });
+    });
+  });
+});
