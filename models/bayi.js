@@ -1,5 +1,5 @@
 'use strict';
-const {BeratBadan} = require('./')
+const { BeratBadan } = require('./')
 const {
   Model
 } = require('sequelize');

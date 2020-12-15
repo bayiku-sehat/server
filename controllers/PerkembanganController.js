@@ -80,7 +80,7 @@ class PerkembanganController {
       }
       const data = await Perkembangan.create(params)
       res.status(201).json(data)
-    } catch(error) {
+    } catch (error) {
       next(error)
     }
   }
@@ -167,7 +167,7 @@ class PerkembanganController {
         returning: true
       })
       res.status(200).json(data[1][0])
-    } catch(error) {
+    } catch (error) {
       next(error)
     }
   }
@@ -179,10 +179,10 @@ class PerkembanganController {
           id: req.params.perkembangan_id
         }
       })
-      if(deletePerkembangan === 1) {
-        res.status(200).json({name: "Data perkembangan bayi telah dihapus."})
+      if (deletePerkembangan === 1) {
+        res.status(200).json({ name: "Data perkembangan bayi telah dihapus." })
       } else {
-        res.status(400).json({message: "Data perkembangan bayi tidak ditemukan."})
+        res.status(400).json({ message: "Data perkembangan bayi tidak ditemukan." })
       }
     } catch (error) {
       next(error)
