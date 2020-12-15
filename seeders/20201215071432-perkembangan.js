@@ -1,5 +1,5 @@
 'use strict'
-const { User } = require('../models')
+const fs = require('fs')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     /**
@@ -11,18 +11,11 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    // const data = fs.readFileSync('./data/user.json','utf8')
-    // await queryInterface.bulkInsert('Users',JSON.parse(data), {})
-    let data = require('../data/user')
-    data.forEach((item) => {
-      item.createdAt = new Date()
-      item.updatedAt = new Date()
-    })
-    // await queryInterface.bulkInsert('Users', data, {})
-
+    // const data = fs.readFileSync('./data/bayi.json','utf8')
+    let data = require('../data/perkembangan')
     try {
-      const users = await User.bulkCreate(data)
-      // console.log(users)
+      const results = await queryInterface.bulkInsert('Perkembangans', data, {})
+      // console.log(results)
     } catch (error) {
       console.log(error)
     }
@@ -35,6 +28,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Users', null, {})
+    await queryInterface.bulkDelete('Perkembangans', null, {})
   },
 }

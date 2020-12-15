@@ -1,86 +1,83 @@
 [
-    {
-        "nama": "Ani",
-        "alamat": "Jakarta",
-        "usia": 32,
-        "jenis_kelamin": "Perempuan",
-        "username": "Ani",
-        "password": "$2b$10$wI9MtC/enrEmtUPRRnYzBObZ.gu1raSPIseW7C.n4tG5MKSsib2fS",
-        "no_hp": 82512,
-        "role": "Petugas",
-        "createdAt": "2020-12-12T11:21:38.399Z",
-        "updatedAt": "2020-12-13T10:21:27.970Z"
-    },
-    {
-        "nama": "Ina",
-        "alamat": "Jakarta",
-        "usia": 32,
-        "jenis_kelamin": "Perempuan",
-        "username": "Ani",
-        "password": "$2b$10$b5vB2ysLMan8LXjRUE6UZePYkzSyqx.jK6pN9ZFEFn15KwUoNW2Vy",
-        "no_hp": 82512,
-        "role": "Petugas",
-        "createdAt": "2020-12-12T11:22:07.957Z",
-        "updatedAt": "2020-12-13T10:22:10.834Z"
-    },
-    {
-        "nama": "Maryam",
-        "alamat": "Jakarta",
-        "usia": 23,
-        "jenis_kelamin": "Perempuan",
-        "username": "Maryam",
-        "password": "$2b$10$4s2/jgF7Gr0vKSvuWoejWuSRmP3cdm6efGD2wvTYwxDv4ams7biAW",
-        "no_hp": 878567342,
-        "role": "Orang Tua",
-        "createdAt": "2020-12-12T11:22:07.957Z",
-        "updatedAt": "2020-12-13T10:27:41.673Z"
-    },
-    {
-        "nama": "Susi",
-        "alamat": "Jakarta",
-        "usia": 34,
-        "jenis_kelamin": "Perempuan",
-        "username": "Susi",
-        "password": "$2b$10$e2mQxU9tWy1dcpFzbZlMbO4LlJUjpEyszdviVulkRxau.LAOjqXdG",
-        "no_hp": 878567342,
-        "role": "Orang Tua",
-        "createdAt": "2020-12-12T11:22:07.957Z",
-        "updatedAt": "2020-12-13T10:26:25.130Z"
-    },
-    {
-        "nama": "Dama",
-        "alamat": "Jakarta",
-        "usia": 34,
-        "jenis_kelamin": "Perempuan",
-        "username": "Dama",
-        "password": "$2b$10$aiQHF20NvmttNcSDiI3Leex9TdaWLSG8Gbm4JmOtGxowvz4R4O49W",
-        "no_hp": 878567342,
-        "role": "Orang Tua",
-        "createdAt": "2020-12-12T11:22:07.957Z",
-        "updatedAt": "2020-12-13T10:25:33.536Z"
-    },
-    {
-        "nama": "Dr. Boyke",
-        "alamat": "Jakarta",
-        "usia": 54,
-        "jenis_kelamin": "Perempuan",
-        "username": "Boyke",
-        "password": "$2b$10$rCFlgJv.Jzh.tlyB.1w1eeoP9QBGHtYfEUHQhJxR65SKUL/iIm9ne",
-        "no_hp": 878567342,
-        "role": "Dokter",
-        "createdAt": "2020-12-12T11:22:07.957Z",
-        "updatedAt": "2020-12-13T10:23:51.048Z"
-    },
-    {
-        "nama": "Dr. Herman",
-        "alamat": "Jakarta",
-        "usia": 54,
-        "jenis_kelamin": "Perempuan",
-        "username": "Herman",
-        "password": "$2b$10$TNB/iWvEaebxys16Q1t.Cez0.VfGmzx6WGdPIi9D.bU8EjVDuS1gm",
-        "no_hp": 878567342,
-        "role": "Dokter",
-        "createdAt": "2020-12-12T11:22:07.957Z",
-        "updatedAt": "2020-12-13T10:24:51.185Z"
-    }
+  {
+    "nama": "Ani",
+    "alamat": "Jakarta",
+    "usia": 32,
+    "jenis_kelamin": "Perempuan",
+    "username": "Ani",
+    "password": "123",
+    "no_hp": 82512,
+    "role": "Petugas"
+  },
+  {
+    "nama": "Ina",
+    "alamat": "Jakarta",
+    "usia": 32,
+    "jenis_kelamin": "Perempuan",
+    "username": "Ani",
+    "password": "123",
+    "no_hp": 82512,
+    "role": "Petugas"
+  },
+  {
+    "nama": "Maryam",
+    "alamat": "Jakarta",
+    "usia": 23,
+    "jenis_kelamin": "Perempuan",
+    "username": "Maryam",
+    "password": "123",
+    "no_hp": 878567342,
+    "role": "Orang Tua"
+  },
+  {
+    "nama": "Susi",
+    "alamat": "Jakarta",
+    "usia": 34,
+    "jenis_kelamin": "Perempuan",
+    "username": "Susi",
+    "password": "123",
+    "no_hp": 878567342,
+    "role": "Orang Tua"
+  },
+  {
+    "nama": "Dama",
+    "alamat": "Jakarta",
+    "usia": 34,
+    "jenis_kelamin": "Laki-laki",
+    "username": "Dama",
+    "password": "123",
+    "no_hp": 878567342,
+    "role": "Orang Tua"
+  },
+  {
+    "nama": "dr. Boyke",
+    "alamat": "Jakarta",
+    "usia": 54,
+    "jenis_kelamin": "Laki-laki",
+    "username": "Boyke",
+    "password": "123",
+    "no_hp": 878567342,
+    "role": "Dokter"
+  },
+  {
+    "nama": "dr. Herman",
+    "alamat": "Jakarta",
+    "usia": 54,
+    "jenis_kelamin": "Laki-laki",
+    "username": "Herman",
+    "password": "123",
+    "no_hp": 878567342,
+    "role": "Dokter"
+  },
+  {
+    "nama": "dr. Camila",
+    "alamat": "Jakarta",
+    "usia": 54,
+    "jenis_kelamin": "Perempuan",
+    "username": "Camila",
+    "password": "123",
+    "no_hp": 878567342,
+    "role": "Dokter",
+    "foto": "https://steemitimages.com/640x0/https://img.esteem.ws/adh8217cds.jpg"
+  }
 ]

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 const fs = require('fs')
 
 module.exports = {
@@ -11,24 +11,36 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */
+     */
     class LingkarKepala {
-      constructor(bulan, sd_n3, sd_n2, sd_n1, median, sd_1, sd_2, sd_3, jenisKelamin) {
-        this.bulan = bulan,
-          this.sd_n3 = sd_n3,
-          this.sd_n2 = sd_n2,
-          this.sd_n1 = sd_n1,
-          this.median = median,
-          this.sd_1 = sd_1,
-          this.sd_2 = sd_2,
-          this.sd_3 = sd_3,
-          this.jenisKelamin = jenisKelamin
+      constructor(
+        bulan,
+        sd_n3,
+        sd_n2,
+        sd_n1,
+        median,
+        sd_1,
+        sd_2,
+        sd_3,
+        jenisKelamin
+      ) {
+        ;(this.bulan = bulan),
+          (this.sd_n3 = sd_n3),
+          (this.sd_n2 = sd_n2),
+          (this.sd_n1 = sd_n1),
+          (this.median = median),
+          (this.sd_1 = sd_1),
+          (this.sd_2 = sd_2),
+          (this.sd_3 = sd_3),
+          (this.jenisKelamin = jenisKelamin)
       }
     }
     let dataLingkarKepala = []
-    const lingkarKepala = fs.readFileSync("./data-who/lingkar-kepala.csv", { encoding: "utf8" }).split('\r\n')
-    lingkarKepala.forEach(el => {
-      const perBayi = el.split(";")
+    const lingkarKepala = fs
+      .readFileSync('./data-who/lingkar-kepala.csv', { encoding: 'utf8' })
+      .split('\r\n')
+    lingkarKepala.forEach((el) => {
+      const perBayi = el.split(';')
       const newInstance = new LingkarKepala(
         +perBayi[0],
         +perBayi[1],
@@ -38,25 +50,25 @@ module.exports = {
         +perBayi[5],
         +perBayi[6],
         +perBayi[7],
-        perBayi[8])
+        perBayi[8]
+      )
       dataLingkarKepala.push(newInstance)
     })
-    dataLingkarKepala.map(el => {
+    dataLingkarKepala.map((el) => {
       el.createdAt = new Date()
       el.updatedAt = new Date()
       return el
     })
-    await queryInterface.bulkInsert('LingkarKepalas', dataLingkarKepala, {});
+    await queryInterface.bulkInsert('LingkarKepalas', dataLingkarKepala, {})
   },
 
-
-      down: async (queryInterface, Sequelize) => {
-        /**
-         * Add commands to revert seed here.
-         *
-         * Example:
-         * await queryInterface.bulkDelete('People', null, {});
-         */
-        await queryInterface.bulkDelete('LingkarKepalas', null, {});
-      }
-};
+  down: async (queryInterface, Sequelize) => {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+    await queryInterface.bulkDelete('LingkarKepalas', null, {})
+  },
+}

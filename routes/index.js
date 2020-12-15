@@ -28,6 +28,9 @@ router.put('/bayi/:bayiId', BayiController.verifyBayi)
 router.post('/bayi', BayiController.add)
 router.delete('/bayi/:bayiId', BayiController.deleteBayi)
 
-router.post('/bayi/:bayiId/perkembangan', PerkembanganController.addPerkembangan)
+router.post(
+  '/bayi/:bayiId/perkembangan',
+  PerkembanganController.addPerkembangan
+)
 
 module.exports = router

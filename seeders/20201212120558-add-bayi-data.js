@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 const fs = require('fs')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -10,9 +10,15 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */
-  const data = fs.readFileSync('./data/bayi.json','utf8')
-  await queryInterface.bulkInsert('Bayis', JSON.parse(data), {})
+     */
+    // const data = fs.readFileSync('./data/bayi.json','utf8')
+    let data = require('../data/bayi.js')
+    try {
+      const bayis = await queryInterface.bulkInsert('Bayis', data, {})
+      console.log(bayis)
+    } catch (error) {
+      console.log(error)
+    }
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -22,6 +28,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Bayis', null, {});
-  }
-};
+    await queryInterface.bulkDelete('Bayis', null, {})
+  },
+}

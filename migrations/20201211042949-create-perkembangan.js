@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Perkembangans', {
@@ -6,46 +6,58 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      tanggal_pemeriksaan: {
-        type: Sequelize.DATE
-      },
+      // tanggal_pemeriksaan: {
+      //   type: Sequelize.DATE,
+      // },
       lingkar_kepala: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       tinggi: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       berat_badan: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       status_lingkar_kepala: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       status_tinggi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       status_berat_badan: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+      },
+      status_kasus: {
+        type: Sequelize.STRING,
+      },
+      status_verify: {
+        type: Sequelize.STRING,
+      },
+      verify_date: {
+        type: Sequelize.DATE,
+      },
+      verifyById: {
+        type: Sequelize.INTEGER,
       },
       BayiId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       UserId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
+        type: Sequelize.DATE,
+      },
+    })
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Perkembangans');
-  }
-};
+    await queryInterface.dropTable('Perkembangans')
+  },
+}
