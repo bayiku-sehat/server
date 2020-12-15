@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
   // buat seeding
   User.beforeBulkCreate((users) => {
     users.map((user) => {
-      const hash = hashPassword(user.password)
+      const hash = makeHash(user.password)
 
       user.password = hash
       user.username = user.username.toLowerCase()
