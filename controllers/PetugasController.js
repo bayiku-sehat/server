@@ -19,7 +19,8 @@ class PetugasController {
         no_hp: req.body.no_hp,
         jenis_kelamin: req.body.jenis_kelamin,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        role: req.body.role
       }
       const data = await Petugas.create(params)
       res.status(201).json(data)
@@ -36,7 +37,8 @@ class PetugasController {
         no_hp: req.body.no_hp,
         jenis_kelamin: req.body.jenis_kelamin,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        role: req.body.role
       }
       const data = await Petugas.update(params, {
         where: {

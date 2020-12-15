@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      catatan: {
-        type: Sequelize.STRING
-      },
       tanggal_pemeriksaan: {
         type: Sequelize.DATE
       },
@@ -23,7 +20,16 @@ module.exports = {
       berat_badan: {
         type: Sequelize.DECIMAL
       },
-      status: {
+      status_lingkar_kepala: {
+        type: Sequelize.INTEGER
+      },
+      status_tinggi: {
+        type: Sequelize.INTEGER
+      },
+      status_berat_badan: {
+        type: Sequelize.INTEGER
+      },
+      catatan: {
         type: Sequelize.STRING
       },
       Bayi_id: {

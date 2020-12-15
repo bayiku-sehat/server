@@ -26,17 +26,17 @@ module.exports = {
       berat_badan: {
         type: Sequelize.DECIMAL
       },
-      status: {
+      status_lingkar_kepala: {
+        type: Sequelize.INTEGER
+      },
+      status_tinggi: {
+        type: Sequelize.INTEGER
+      },
+      status_berat_badan: {
+        type: Sequelize.INTEGER
+      },
+      catatan: {
         type: Sequelize.STRING
-      },
-      OrangTua_Wali_id: {
-        type: Sequelize.INTEGER
-      },
-      Petugas_id: {
-        type: Sequelize.INTEGER
-      },
-      Dokter_id: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
