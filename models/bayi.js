@@ -12,31 +12,48 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Bayi.belongsTo(models.Orangtua_Wali, {
-        targetKey: 'id',
-        foreignKey: 'OrangTua_Wali_id'
+
+      Bayi.belongsToMany(models.User, {through: models.BayiUser})
+      Bayi.belongsTo(models.User, {
+        targetKey: "id",
+        foreignKey: "verifyById"
       })
       Bayi.hasMany(models.Perkembangan, {
         sourceKey: 'id',
-        foreignKey: 'Bayi_id'
+        foreignKey: 'BayiId'
       })
-      Bayi.belongsToMany(models.Dokter, {
-        through: models.Pasien, 
-        targetKey: 'id',
-      foreignKey: 'Bayi_id'})
     }
   };
   Bayi.init({
-    nama: DataTypes.STRING,
+    nama: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          mgs: "nama tidak boleh kosong"
+        }
+      }
+    },
     tanggal_lahir: DataTypes.DATE,
-    jenis_kelamin: DataTypes.STRING,
+    jenis_kelamin: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'jenis kelamin tidak boleh kosong'
+        }
+      }
+    },
     lingkar_kepala: DataTypes.DECIMAL,
     tinggi: DataTypes.DECIMAL,
     berat_badan: DataTypes.DECIMAL,
     status_lingkar_kepala: DataTypes.INTEGER,
     status_tinggi: DataTypes.INTEGER,
     status_berat_badan: DataTypes.INTEGER,
-    catatan: DataTypes.STRING,
+    status_kasus: DataTypes.STRING,
+    verify_date: DataTypes.DATE,
+    status_verify: DataTypes.STRING,
+    verifyById: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Bayi',

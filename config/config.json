@@ -1,15 +1,16 @@
 {
   "development": {
-    "username": "bimodwienprabowo",
-    "password": "bimo",
+    "username": "postgres",
+    "password": "123",
     "database": "bayiku-sehat",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "bimodwienprabowo",
-    "password": "bimo",
-    "database": "bayiku-sehat",
+    "username": "postgres",
+    "password": "123",
+    "database": "bayiku-sehat-test",
+
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

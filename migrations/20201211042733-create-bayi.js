@@ -35,8 +35,17 @@ module.exports = {
       status_berat_badan: {
         type: Sequelize.INTEGER
       },
-      catatan: {
+      status_kasus: {
         type: Sequelize.STRING
+      },
+      status_verify: {
+        type: Sequelize.STRING
+      },
+      verify_date: {
+        type: Sequelize.DATE
+      },
+      verifyById: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

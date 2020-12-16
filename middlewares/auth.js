@@ -1,6 +1,6 @@
 'use strict'
 const { verifyToken } = require('../helpers/jwt')
-const {User} = require('../models')
+const {User} = require('../models/')
 
 const authentication = (req, res, next)=> {
     const decoded = verifyToken(req.headers.access_token)
