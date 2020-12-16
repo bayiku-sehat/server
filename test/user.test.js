@@ -1,12 +1,64 @@
 const request = require("supertest");
-const { response, use } = require("../app");
 const app = require("../app");
 const { User, Bayi, Perkembangan } = require("../models/index");
 const { sequelize } = require("../models");
 const { queryInterface } = sequelize;
-const { signToken } = require("../helpers/jwt");
+const { signToken, verifyToken } = require("../helpers/jwt");
 let id;
-let access_token;
+
+const user = { username: ("Maryam").toLocaleLowerCase(), password: "Maryammaryam", role: "Dokter" }
+const user2 = { username: ("Ani").toLocaleLowerCase(), password: "Aniani", role: "Petugas" }
+const bayi = {
+  nama: "Marni",
+  tanggal_lahir: "12-12-20",
+  jenis_kelamin: "Perempuan",
+  lingkar_kepala: 34,
+  tinggi: 49.1,
+  berat_badan: 3.2,
+  foto: "foto"
+}
+
+let bayiBaru = ''
+let access_token = ''
+let token = '';
+let petugas = '';
+let dokter = '';
+
+beforeAll((done) => {
+  User.create(user)
+    .then((data) => {
+      const userInput = {
+        id: data.id,
+        username: data.username.toLowerCase(),
+        role: data.role
+      }
+      access_token = signToken(userInput)
+      dokter = data
+      console.log(verifyToken(access_token).id, "1dokter")
+      return User.create(user2)
+    })
+    .then((data) => {
+      console.log(data, "22222")
+      const user2Input = {
+        id: data.id,
+        username: data.username,
+        role: data.role
+      }
+      petugas = data
+
+      token = signToken(user2Input)
+      return Bayi.create(bayi)
+    })
+    .then((data) => {
+      bayiBaru = data
+      return done()
+    })
+    .catch(err => {
+      return done(err)
+    })
+})
+
+
 
 describe("Test success CRUD User", () => {
   it("Test success Get dokter", done => {
@@ -80,27 +132,31 @@ describe("User Routes Test", () => {
   };
 
   describe("POST /user - create new user", () => {
-    beforeAll(done => {
-      User.create(userData2)
-        .then(_ => {
-          done();
-        })
-        .catch(err => {
-          done(err);
-        });
-    });
-
-    afterAll(done => {
-      queryInterface
-        .bulkDelete("Users", {})
-        .then(() => done())
-        .catch(err => done(err));
-    });
-
     test("201 Success user - should create new User", done => {
       request(app)
         .post("/user")
         .send(userData)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(201);
+          expect(body).toHaveProperty("id", expect.any(Number));
+          expect(body).toHaveProperty("username", userData.username);
+          done();
+        });
+    });
+    test("201 Success user - should create new User", done => {
+      request(app)
+        .post("/user")
+        .send({
+          username: "ajeng",
+          password: "ajeng",
+          nama: "",
+          alamat: "Jakarta",
+          usia: null,
+          no_hp: 685212345,
+          jenis_kelamin: "perempuan",
+          role: "Dokter",
+        })
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(201);
@@ -118,7 +174,6 @@ describe("User Routes Test", () => {
         })
         .then(response => {
           const { body, status } = response;
-          console.log(body, "dsfsdfds");
           expect(status).toBe(400);
           expect(body).toHaveProperty("message", "field must be not empty");
           done();
@@ -184,26 +239,6 @@ describe("User Routes Test", () => {
         });
     });
     describe("POST /login - user authentication process", () => {
-      beforeAll(done => {
-        User.create({
-          username: "farah",
-          password: "farah",
-        })
-          .then(_ => {
-            done();
-          })
-          .catch(err => {
-            done(err);
-          });
-      });
-
-      afterAll(done => {
-        queryInterface
-          .bulkDelete("Users", {})
-          .then(() => done())
-          .catch(err => done(err));
-      });
-
       test("200 Success login - should return access_token", done => {
         request(app)
           .post("/login")
@@ -257,7 +292,6 @@ describe("User Routes Test", () => {
       //     beforeAll(done => {
       //       User.create(userData)
       //         .then(() => {
-      //           console.log("yayayya");
       //           return User.findOne({
       //             where: {
       //               username: "ajeng",
@@ -266,13 +300,11 @@ describe("User Routes Test", () => {
       //         })
       //         .then(user => {
       //           id = user.id;
-      //           console.log(id, "id", user);
       //           access_token = signToken({
       //             id: user.id,
       //             username: user.username,
       //             role: user.role,
       //           });
-      //           console.log(access_token, "hjhjhjhjh");
       //           done();
       //         })
       //         .catch(err => {
@@ -301,7 +333,6 @@ describe("User Routes Test", () => {
       //         })
       //         .then(response => {
       //           const { body, status } = response;
-      //           console.log(access_token);
       //           //expect(status).toBe(200);
       //           expect(response).toHaveProperty("body", expect.any(Object));
       //           done();
@@ -314,3 +345,82 @@ describe("User Routes Test", () => {
     });
   });
 });
+console.log(dokter.id, "iddok")
+describe("Test success CRUD User detail", () => {
+  it("Test success Get user detail", done => {
+    request(app)
+      .post(`/user/${dokter.id}`)
+      .set("access_token", access_token)
+      .then(response => {
+        let { body, status } = response;
+        expect(status).toBe(200);
+        expect(response).toHaveProperty("body", expect.any(Object));
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+  it("Test failed Get user detail", done => {
+    request(app)
+      .post(`/user/${undefined}`)
+      .set("access_token", token)
+      .then(response => {
+        let { body, status } = response;
+        expect(status).toBe(404);
+        expect(response).toHaveProperty("body", expect.any(Object));
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+});
+describe("Test success CRUD dokter get bayi", () => {
+  it("Test success Get dokter get bayi", done => {
+    request(app)
+      .post(`/user/bayi/${bayiBaru.id}`)
+      .set("access_token", access_token)
+      .then(response => {
+        let { body, status } = response;
+        expect(status).toBe(201);
+        expect(response).toHaveProperty("body", expect.any(Object));
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+  it("Test failed Get not dokter get bayi", done => {
+    request(app)
+      .post(`/user/bayi/${bayiBaru.id}`)
+      .set("access_token", token)
+      .then(response => {
+        let { body, status } = response;
+        expect(status).toBe(403);
+        expect(response).toHaveProperty("body", expect.any(Object));
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+});
+
+
+afterAll((done) => {
+  User.destroy({
+    truncate: true
+  })
+    .then(_ => {
+      return Bayi.destroy({
+        truncate: true
+      })
+    })
+    .then(_ => {
+      return done()
+    })
+    .catch(err => {
+      return done(err)
+    })
+})

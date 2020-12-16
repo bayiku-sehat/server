@@ -15,7 +15,6 @@ module.exports = {
     let data = require('../data/perkembangan')
     try {
       const results = await queryInterface.bulkInsert('Perkembangans', data, {})
-      // console.log(results)
     } catch (error) {
       console.log(error)
     }

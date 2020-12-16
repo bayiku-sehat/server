@@ -22,7 +22,6 @@ module.exports = {
 
     try {
       const users = await User.bulkCreate(data);
-      console.log(users);
     } catch (error) {
       console.log(error);
     }

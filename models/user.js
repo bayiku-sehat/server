@@ -15,9 +15,15 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      nama: DataTypes.STRING,
+      nama: {
+        type: DataTypes.STRING,
+      notEmpty: true
+    },
       alamat: DataTypes.STRING,
-      usia: DataTypes.INTEGER,
+      usia:{
+        type: DataTypes.INTEGER,
+        notNull: true
+      },
       jenis_kelamin: DataTypes.STRING,
       username: {
         type: DataTypes.STRING,

@@ -20,7 +20,7 @@ class BayiController {
       })
       res.status(200).json(data)
     } catch (error) {
-      next(error)
+      next({name: "notFound"})
     }
   }
   static async addBayi(req, res, next) {
@@ -144,10 +144,10 @@ class BayiController {
       if (deleteBayi === 1) {
         res.status(200).json({ message: "data bayi sudah dihapus." })
       } else {
-        res.status(400).json({ message: "data bayi tidak ditemukan." })
+        throw(error)
       }
     } catch (error) {
-      next(error)
+      next({name:"notDataBayi"})
     }
   }
 

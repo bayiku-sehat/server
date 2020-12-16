@@ -9,10 +9,10 @@ const bayi = {
     nama: "Marni",
     tanggal_lahir: "12-12-20",
     jenis_kelamin: "Perempuan",
-    lingkar_kepala: 32.7,
-    tinggi: 47.3,
-    berat_badan: 3.5,
-    foto:"foto"
+    lingkar_kepala: 34,
+    tinggi: 49.1,
+    berat_badan: 3.2,
+    foto: "foto"
 }
 
 let bayiBaru = ''
@@ -23,13 +23,13 @@ let orangTua = '';
 
 beforeAll((done) => {
     User.create(user)
-    .then((data) => {
-        const userInput = {
-            id: data.id,
-            username: data.username.toLowerCase(),
-            role: data.role
-        }
-        access_token = signToken(userInput)
+        .then((data) => {
+            const userInput = {
+                id: data.id,
+                username: data.username.toLowerCase(),
+                role: data.role
+            }
+            access_token = signToken(userInput)
             orangTua = data
             return User.create(user2)
         })
@@ -40,7 +40,7 @@ beforeAll((done) => {
                 role: data.role
             }
             petugas = data
-            
+
             token = signToken(user2Input)
             return Bayi.create(bayi)
         })
@@ -53,22 +53,7 @@ beforeAll((done) => {
         })
 })
 
-afterAll((done) => {
-    User.destroy({
-        truncate: true
-    })
-        .then(_ => {
-            return Bayi.destroy({
-                truncate: true
-            })
-        })
-        .then(_ => {
-            return done()
-        })
-        .catch(err => {
-            return done(err)
-        })
-})
+
 
 // Succesfull create CRUD 
 
@@ -87,6 +72,7 @@ describe("Test success CRUD Bayi", () => {
                 done(err)
             })
     })
+
 })
 
 describe("Test Success CRUD Bayi", () => {
@@ -101,7 +87,7 @@ describe("Test Success CRUD Bayi", () => {
                 lingkar_kepala: null,
                 tinggi: null,
                 berat_badan: null,
-                foto:"foto"
+                foto: "foto"
             })
             .set('Accept', 'application/json')
             .then((response) => {
@@ -116,7 +102,7 @@ describe("Test Success CRUD Bayi", () => {
     })
 })
 describe("Test Success CRUD Bayi", () => {
-    it("Test success Post Bayi ", (done) => {
+    it("Test success Post Bayi normal ", (done) => {
         request(app)
             .post('/bayi')
             .set("access_token", access_token)
@@ -125,6 +111,9 @@ describe("Test Success CRUD Bayi", () => {
             .then((response) => {
                 let { body, status } = response
                 expect(status).toBe(201)
+                expect(body).toHaveProperty("status_lingkar_kepala", 0)
+                expect(body).toHaveProperty("status_tinggi", 0)
+                expect(body).toHaveProperty("status_berat_badan", 0)
                 expect(response).toHaveProperty("body", expect.any(Object))
                 done()
             })
@@ -132,6 +121,164 @@ describe("Test Success CRUD Bayi", () => {
                 done(err)
             })
     })
+    it("Test success post bayi sd -1", (done) => {
+
+        const inputBayi = {
+            nama: "Marni",
+            tanggal_lahir: "12-12-20",
+            jenis_kelamin: "Perempuan",
+            lingkar_kepala: 32.7,
+            tinggi: 47.3,
+            berat_badan: 2.8
+        }
+        request(app)
+            .post(`/bayi`)
+            .set("access_token", token)
+            .send(inputBayi)
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(201)
+                expect(body).toHaveProperty("status_lingkar_kepala", -1)
+                expect(body).toHaveProperty("status_tinggi", -1)
+                expect(body).toHaveProperty("status_berat_badan", -1)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+    it("Test success post bayi sd -2", (done) => {
+        const inputBayi = {
+            nama: "Marni",
+            tanggal_lahir: "12-12-20",
+            jenis_kelamin: "Perempuan",
+            lingkar_kepala: 31.5,
+            tinggi: 45.4,
+            berat_badan: 2.4
+        }
+        request(app)
+            .post(`/bayi`)
+            .set("access_token", token)
+            .send(inputBayi)
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(201)
+                expect(body).toHaveProperty("status_lingkar_kepala", -2)
+                expect(body).toHaveProperty("status_tinggi", -2)
+                expect(body).toHaveProperty("status_berat_badan", -2)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+    it("Test success post bayi sd -3", (done) => {
+        const inputBayi = {
+            nama: "Marni",
+            tanggal_lahir: "12-12-20",
+            jenis_kelamin: "Perempuan",
+            lingkar_kepala: 30,
+            tinggi: 40,
+            berat_badan: 1
+        }
+        request(app)
+            .post(`/bayi`)
+            .set("access_token", token)
+            .send(inputBayi)
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(201)
+                expect(body).toHaveProperty("status_lingkar_kepala", -3)
+                expect(body).toHaveProperty("status_tinggi", -3)
+                expect(body).toHaveProperty("status_berat_badan", -3)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+    it("Test success post bayi sd 1", (done) => {
+        const inputBayi = {
+            nama: "Marni",
+            tanggal_lahir: "12-12-20",
+            jenis_kelamin: "Perempuan",
+            lingkar_kepala: 35.1,
+            tinggi: 51,
+            berat_badan: 3.7
+        }
+        request(app)
+            .post(`/bayi`)
+            .set("access_token", token)
+            .send(inputBayi)
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(201)
+                expect(body).toHaveProperty("status_lingkar_kepala", 1)
+                expect(body).toHaveProperty("status_tinggi", 1)
+                expect(body).toHaveProperty("status_berat_badan", 1)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+    it("Test success post bayi sd 2", (done) => {
+        const inputBayi = {
+            nama: "Marni",
+            tanggal_lahir: "12-12-20",
+            jenis_kelamin: "Perempuan",
+            lingkar_kepala: 36.2,
+            tinggi: 52.9,
+            berat_badan: 4.2
+        }
+        request(app)
+            .post(`/bayi`)
+            .set("access_token", token)
+            .send(inputBayi)
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(201)
+                expect(body).toHaveProperty("status_lingkar_kepala", 2)
+                expect(body).toHaveProperty("status_tinggi", 2)
+                expect(body).toHaveProperty("status_berat_badan", 2)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+    it("Test success post bayi sd 3", (done) => {
+        const inputBayi = {
+            nama: "Marni",
+            tanggal_lahir: "12-12-20",
+            jenis_kelamin: "Perempuan",
+            lingkar_kepala: 37.4,
+            tinggi: 54.7,
+            berat_badan: 4.8
+        }
+        request(app)
+            .post(`/bayi`)
+            .set("access_token", token)
+            .send(inputBayi)
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(201)
+                expect(body).toHaveProperty("status_lingkar_kepala", 3)
+                expect(body).toHaveProperty("status_tinggi", 3)
+                expect(body).toHaveProperty("status_berat_badan", 3)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+
 })
 describe("Test Success CRUD Bayi", () => {
     it("Test success get Bayi detail ", (done) => {
@@ -141,6 +288,20 @@ describe("Test Success CRUD Bayi", () => {
             .then((response) => {
                 let { body, status } = response
                 expect(status).toBe(200)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+    it("Test fail get Bayi detail ", (done) => {
+        request(app)
+            .get(`/bayi/${undefined}`)
+            .set("access_token", token)
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(400)
                 expect(response).toHaveProperty("body", expect.any(Object))
                 done()
             })
@@ -183,7 +344,7 @@ describe("Test Success CRUD Bayi", () => {
 describe("Test Success CRUD Bayi", () => {
     it("Test failed id bayi Put Bayi ", (done) => {
         request(app)
-            .put(`/bayi/${1000000000000000000}`)
+            .put(`/bayi/${undefined}`)
             .set("access_token", token)
             .then((response) => {
                 let { body, status } = response
@@ -204,6 +365,20 @@ describe("Test Success CRUD Bayi", () => {
             .then((response) => {
                 let { body, status } = response
                 expect(status).toBe(200)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+    it("Test fail Delete Bayi ", (done) => {
+        request(app)
+            .delete(`/bayi/${-1}`)
+            .set("access_token", access_token)
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(400)
                 expect(response).toHaveProperty("body", expect.any(Object))
                 done()
             })
@@ -250,7 +425,7 @@ describe("Test Failed CRUD Bayi", () => {
             .then((response) => {
                 let { body, status } = response
                 expect(status).toBe(400)
-                expect(body).toHaveProperty("errors", expect.any(Array))
+                expect(body).toHaveProperty("message", 'field must be not empty')
                 done()
             })
             .catch(err => {
@@ -301,7 +476,7 @@ describe("Test Success CRUD Bayi", () => {
 describe("Test Failed CRUD Bayi", () => {
     it("Test failed without access_token", (done) => {
         request(app)
-        .delete(`/bayi/${bayiBaru.id}`)
+            .delete(`/bayi/${bayiBaru.id}`)
             .then((response) => {
                 let { body, status } = response
                 expect(status).toBe(401)
@@ -329,4 +504,21 @@ describe("Test Failed CRUD Bayi", () => {
                 done(err)
             })
     })
+})
+
+afterAll((done) => {
+    User.destroy({
+        truncate: true
+    })
+        .then(_ => {
+            return Bayi.destroy({
+                truncate: true
+            })
+        })
+        .then(_ => {
+            return done()
+        })
+        .catch(err => {
+            return done(err)
+        })
 })

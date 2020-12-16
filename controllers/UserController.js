@@ -2,7 +2,6 @@
 const { compareHash } = require('../helpers/hash')
 const { signToken } = require('../helpers/jwt')
 const { User, Bayi, BayiUser } = require('../models/index')
-const { use } = require('../routes')
 
 class UserController {
   static async showDokter(req, res, next) {
@@ -57,7 +56,6 @@ class UserController {
       const data = await User.create(params);
       res.status(201).json(data);
     } catch (error) {
-      console.log(error, "iiiiiii");
       next(error);
     }
   }
@@ -142,7 +140,7 @@ class UserController {
     const bayiId = req.params.bayiId;
     try {
       if (req.userData.role !== "Dokter") {
-        res.status(403).json({ msg: "Anda tidak berhak menangani pasien." })
+        next(error)
       } else {
         const getBayi = await Bayi.findByPk(bayiId);
         const data = {
@@ -153,7 +151,7 @@ class UserController {
         res.status(201).json(bayiUser);
       }
     } catch (error) {
-      next(error);
+      next({name: "notDokter"});
     }
   }
 }

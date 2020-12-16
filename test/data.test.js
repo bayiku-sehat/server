@@ -18,6 +18,21 @@ describe("Test success CRUD Bayi", () => {
     })
 })
 describe("Test success CRUD Bayi", () => {
+    it('Test failed Get lingkar kepala', (done) => {
+        request(app)
+            .get('/lingkar-kepala')
+            .then((response) => {
+                let { body, status } = response
+                expect(status).toBe(400)
+                expect(response).toHaveProperty("body", expect.any(Object))
+                done()
+            })
+            .catch(err => {
+                done(err)
+            })
+    })
+})
+describe("Test success CRUD Bayi", () => {
     it('Test success Get tinggi badan', (done) => {
         request(app)
             .get('/tinggi')
