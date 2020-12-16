@@ -90,6 +90,12 @@ module.exports = [
     updatedAt: '2019-12-02T17:00:00.000Z',
   },
   {
+    BayiId: 4,
+    UserId: 7,
+    createdAt: '2020-12-12T17:00:00.000Z',
+    updatedAt: '2020-12-12T17:00:00.000Z',
+  },
+  {
     BayiId: 5,
     UserId: 1,
     createdAt: '2019-04-03T17:00:00.000Z',
@@ -97,7 +103,7 @@ module.exports = [
   },
   {
     BayiId: 5,
-    UserId: 1,
+    UserId: 7,
     createdAt: '2020-12-14T17:00:00.000Z',
     updatedAt: '2020-12-14T17:00:00.000Z',
   },

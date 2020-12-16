@@ -65,7 +65,7 @@ module.exports = [
     berat_badan: '7.5',
     status_lingkar_kepala: -1,
     status_tinggi: -2,
-    status_kasus: 'Open',
+    status_kasus: 'In Progress',
     status_berat_badan: -1,
     status_verify: 'verified',
     verify_date: '2019-12-03T17:00:00.000Z',
