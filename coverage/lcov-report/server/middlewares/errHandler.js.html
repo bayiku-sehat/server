@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.76% </span>
+                <span class="strong">75.68% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/37</span>
+                <span class='fraction'>28/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65.38% </span>
+                <span class="strong">76.92% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>17/26</span>
+                <span class='fraction'>20/26</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.76% </span>
+                <span class="strong">75.68% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/37</span>
+                <span class='fraction'>28/37</span>
             </div>
         
             
@@ -104,47 +104,47 @@
 <a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
 &nbsp;
 function errorHandler(err, req, res, next) {
@@ -160,30 +160,30 @@ function errorHandler(err, req, res, next) {
   } else if (err.name === "SequelizeValidationError") {
     statusCode = 400;
     message = "field must be not empty";
-  } else if (err.name === "SequelizeUniqueConstraintError") {
-    message = "user already exists";
-    statusCode = 400;
-  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === "JsonWebTokenError") {
-<span class="cstat-no" title="statement not covered" >    message = err.message + "user unauthenticated";</span>
-<span class="cstat-no" title="statement not covered" >    statusCode = 401;</span>
-  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === "notDataPerkembaganBayi") {
-<span class="cstat-no" title="statement not covered" >    message = "Data perkembangan bayi tidak ditemukan."</span>
-<span class="cstat-no" title="statement not covered" >    statusCode = 400</span>
-  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === "notDataBayi") {
-<span class="cstat-no" title="statement not covered" >    message = "Data bayi tidak ditemukan."</span>
-<span class="cstat-no" title="statement not covered" >    statusCode = 400</span>
-  }else <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === "notFound") {
-<span class="cstat-no" title="statement not covered" >      message = "Data tidak ditemukan."</span>
-<span class="cstat-no" title="statement not covered" >      statusCode = 400</span>
-  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === "BadRequestAddBayi") {
-<span class="cstat-no" title="statement not covered" >    message = "Gagal menambah bayi."</span>
-<span class="cstat-no" title="statement not covered" >    statusCode = 404</span>
-  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === "negativeValue") {
-<span class="cstat-no" title="statement not covered" >    message = "Tidak boleh negatif."</span>
-<span class="cstat-no" title="statement not covered" >    statusCode = 404</span>
-  } else <span class="missing-if-branch" title="else path not taken" >E</span>if (err.name === "notDokter") {
-    message = "Anda tidak berhak menangani bayi."
-    statusCode = 403
+  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === "SequelizeUniqueConstraintError") {
+<span class="cstat-no" title="statement not covered" >    message = "user already exists";</span>
+<span class="cstat-no" title="statement not covered" >    statusCode = 400;</span>
+  } else if (err.name === "JsonWebTokenError") {
+    message = err.message + "user unauthenticated";
+    statusCode = 401;
+  } else if (err.name === "notDataPerkembaganBayi") {
+    message = "Data perkembangan bayi tidak ditemukan."
+    statusCode = 400
+  } else if (err.name === "notDataBayi") {
+    message = "Data bayi tidak ditemukan."
+    statusCode = 400
+  }else if (err.name === "notFound") {
+      message = "Data tidak ditemukan."
+      statusCode = 400
+  } else if (err.name === "BadRequestAddBayi") {
+    message = "Gagal menambah bayi."
+    statusCode = 404
+  } else <span class="missing-if-branch" title="else path not taken" >E</span>if (err.name === "negativeValue") {
+    message = "Tidak boleh negatif."
+    statusCode = 404
+  } else <span class="cstat-no" title="statement not covered" >if (err.name === "notDokter") {</span>
+<span class="cstat-no" title="statement not covered" >    message = "Anda tidak berhak menangani bayi."</span>
+<span class="cstat-no" title="statement not covered" >    statusCode = 403</span>
   }
   res.status(statusCode).json({ message: message });
 }
@@ -196,7 +196,7 @@ module.exports = errorHandler;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 16 2020 17:27:35 GMT+0700 (Western Indonesia Time)
+                at Wed Dec 16 2020 17:36:27 GMT+0700 (Western Indonesia Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
