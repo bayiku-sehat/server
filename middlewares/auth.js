@@ -9,6 +9,7 @@ const authentication = async (req, res, next) => {
       where: {
         username: decoded.username,
       },
+      include: ['Bayis'],
     })
     req.userData = data
     next()

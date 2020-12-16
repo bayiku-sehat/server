@@ -134,7 +134,8 @@ class UserController {
   }
   static async showDetail(req, res, next) {
     try {
-      const data = await User.findByPk(+req.userData.id)
+      // const data = await User.findByPk(+req.userData.id)
+      res.status(200).json(req.userData)
     } catch (err) {
       next(err)
     }
