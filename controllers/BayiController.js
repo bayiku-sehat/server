@@ -27,18 +27,19 @@ class BayiController {
       })
       res.status(200).json(data)
     } catch (error) {
-      next(error)
+      next({ name: 'notFound' })
     }
   }
-  static async add(req, res, next) {
+  static async addBayi(req, res, next) {
     try {
       let params = {
         nama: req.body.nama,
         tanggal_lahir: new Date(req.body.tanggal_lahir),
         jenis_kelamin: req.body.jenis_kelamin,
         lingkar_kepala: +req.body.lingkar_kepala,
-        tinggi: +req.body.tinggi_badan,
+        tinggi: +req.body.tinggi,
         berat_badan: +req.body.berat_badan,
+        foto: req.body.foto,
       }
       const month = Math.round((new Date() - params.tanggal_lahir) / 2669599261)
       const whoTinggiBadan = await TinggiBadan.findOne({
@@ -163,7 +164,6 @@ class BayiController {
       })
       res.status(201).json(data)
     } catch (error) {
-      console.log(error, '<<<<<< ini error')
       next(error)
     }
   }
@@ -187,7 +187,7 @@ class BayiController {
         res.status(200).json(updateData)
       }
     } catch (error) {
-      next(error)
+      res.status(400).json({ msg: 'fail not found' })
     }
   }
   static async deleteBayi(req, res, next) {
@@ -200,10 +200,10 @@ class BayiController {
       if (deleteBayi === 1) {
         res.status(200).json({ message: 'data bayi sudah dihapus.' })
       } else {
-        res.status(400).json({ message: 'data bayi tidak ditemukan.' })
+        throw error
       }
     } catch (error) {
-      next(error)
+      next({ name: 'notDataBayi' })
     }
   }
 }

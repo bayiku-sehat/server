@@ -38,7 +38,7 @@ module.exports = {
     let dataLingkarKepala = []
     const lingkarKepala = fs
       .readFileSync('./data-who/lingkar-kepala.csv', { encoding: 'utf8' })
-      .split('\n')
+      .split('\r\n')
     lingkarKepala.forEach((el) => {
       const perBayi = el.split(';')
       const newInstance = new LingkarKepala(

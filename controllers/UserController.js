@@ -105,30 +105,39 @@ class UserController {
         username: req.body.username,
         password: req.body.password,
       }
-      console.log(account)
+      if (account.username === '' || account.password === '') {
+        res.status(400).json({ msg: 'you should input something to the field' })
+      }
       const user = await User.findOne({
         where: {
           username: account.username,
         },
       })
       if (!user) {
-        res.status(403).json({ msg: 'username dan password salah' })
+        res.status(403).json({ message: 'username dan password salah' })
       } else if (!compareHash(account.password, user.password)) {
-        res.status(403).json({ msg: 'username dan password salah' })
+        res.status(403).json({ message: 'username dan password salah' })
       } else {
         const access_token = signToken({
           id: user.id,
           username: user.username,
           role: user.role,
         })
-        res.status(200).json({ access_token, role: user.role, id: user.id })
+        res.status(200).json({
+          access_token: access_token,
+          role: user.role,
+        })
       }
     } catch (error) {
       next(error)
     }
   }
   static async showDetail(req, res, next) {
-    res.status(200).json(req.userData)
+    try {
+      const data = await User.findByPk(+req.userData.id)
+    } catch (err) {
+      next(err)
+    }
   }
   static async userById(req, res, next) {
     let id = req.params.userId
@@ -150,7 +159,7 @@ class UserController {
     const bayiId = req.params.bayiId
     try {
       if (req.userData.role !== 'Dokter') {
-        res.status(403).json({ msg: 'Anda tidak berhak menangani pasien.' })
+        next(error)
       } else {
         const getBayi = await Bayi.findByPk(bayiId)
         const data = {
@@ -161,7 +170,7 @@ class UserController {
         res.status(201).json(bayiUser)
       }
     } catch (error) {
-      next(error)
+      next({ name: 'notDokter' })
     }
   }
 }

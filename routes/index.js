@@ -18,20 +18,24 @@ router.get('/user/petugas', UserController.showPerawat)
 router.post('/user', UserController.add)
 router.use(authentication)
 router.get('/user-detail', UserController.showDetail)
-router.get('/user/:userId', UserController.userById)
 router.put('/user/:userId', UserController.editUser)
 router.delete('/user/:userId', UserController.deleteUser)
 router.post('/user/bayi/:bayiId', UserController.userGetBayi)
 
 router.get('/bayi', BayiController.show)
+router.post('/bayi', BayiController.addBayi)
 router.get('/bayi/:bayiId', BayiController.showDetail)
 router.put('/bayi/:bayiId', BayiController.verifyBayi)
-router.post('/bayi', BayiController.add)
 router.delete('/bayi/:bayiId', BayiController.deleteBayi)
 
 router.post(
   '/bayi/:bayiId/perkembangan',
   PerkembanganController.addPerkembangan
 )
-
+router.delete(
+  '/bayi/perkembangan/:perkembanganId',
+  PerkembanganController.deletePerkembangan
+)
+router.post('/dokter/bayi/:bayiId/', PerkembanganController.addBayiToDokter)
+router.delete('/dokter/bayi/:bayiId', PerkembanganController.deleteBayiInDokter)
 module.exports = router

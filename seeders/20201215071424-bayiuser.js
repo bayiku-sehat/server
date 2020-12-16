@@ -16,7 +16,6 @@ module.exports = {
 
     try {
       const results = await queryInterface.bulkInsert('BayiUsers', data, {})
-      // console.log(results)
     } catch (error) {
       console.log(error)
     }

@@ -22,9 +22,12 @@ module.exports = {
       },
       username: {
         type: Sequelize.STRING,
+        unique: true,
+        allowNull: false,
       },
       password: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       no_hp: {
         type: Sequelize.STRING,

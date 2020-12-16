@@ -37,7 +37,7 @@ module.exports = {
     let dataTinggiBadan = []
     const tinggiBadan = fs
       .readFileSync('./data-who/tinggi-badan.csv', { encoding: 'utf8' })
-      .split('\n')
+      .split('\r\n')
     tinggiBadan.forEach((el) => {
       const perBayi = el.split(';')
       const newInstance = new TinggiBadan(

@@ -27,7 +27,7 @@ class BeratBadan {
     }
 }
 let dataBeratBadan = []
-const beratBadan = fs.readFileSync("./data-who/berat-badan.csv", { encoding: "utf8" }).split('\n')
+const beratBadan = fs.readFileSync("./data-who/berat-badan.csv", { encoding: "utf8" }).split('\r\n')
 beratBadan.forEach(el => {
     const perBayi = el.split(";")
     const newInstance = new BeratBadan(

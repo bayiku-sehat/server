@@ -15,12 +15,40 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      nama: DataTypes.STRING,
+      nama: {
+        type: DataTypes.STRING,
+        notEmpty: true,
+      },
       alamat: DataTypes.STRING,
-      usia: DataTypes.INTEGER,
+      usia: {
+        type: DataTypes.INTEGER,
+        notNull: true,
+      },
       jenis_kelamin: DataTypes.STRING,
-      username: DataTypes.STRING,
-      password: DataTypes.STRING,
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'username cannot be empty',
+          },
+          notEmpty: {
+            msg: 'username cannot be empty',
+          },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'password cannot be empty',
+          },
+          notEmpty: {
+            msg: 'password cannot be empty',
+          },
+        },
+      },
       no_hp: DataTypes.STRING,
       role: DataTypes.STRING,
       alamat_puskesmas: DataTypes.STRING,
@@ -31,9 +59,9 @@ module.exports = (sequelize, DataTypes) => {
         beforeCreate(user) {
           user.password = makeHash(user.password)
         },
-        beforeValidate(user) {
-          user.password = makeHash(user.password)
-        },
+        // beforeValidate(user) {
+        //   user.password = makeHash(user.password);
+        // },
         beforeUpdate(user) {
           user.password = makeHash(user.password)
         },
@@ -48,7 +76,6 @@ module.exports = (sequelize, DataTypes) => {
       let hash = makeHash(user.password)
       user.password = hash
       user.username = user.username.toLowerCase()
-
       if (!user.foto) {
         user.foto = `https://avatars.dicebear.com/api/initials/${user.username}.svg`
       }

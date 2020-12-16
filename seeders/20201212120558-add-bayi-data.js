@@ -15,7 +15,6 @@ module.exports = {
     let data = require('../data/bayi.js')
     try {
       const bayis = await queryInterface.bulkInsert('Bayis', data, {})
-      console.log(bayis)
     } catch (error) {
       console.log(error)
     }
