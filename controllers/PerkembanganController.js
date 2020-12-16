@@ -75,6 +75,23 @@ class PerkembanganController {
         updateBayi.status_lingkar_kepala = -2
       } else if (updateBayi.lingkar_kepala < whoLingkarKepala.sd_n3) {
         updateBayi.status_lingkar_kepala = -3
+      const data = await Perkembangan.create(params)
+      res.status(201).json(data)
+    } catch (error) {
+      next(error)
+    }
+  }
+  static async editPerkembangan(req, res, next) {
+    try {
+      const bayiId = req.params.bayi_id
+      const bayi = await Bayi.findByPk(bayiId)
+      let params = {
+        catatan: req.body.catatan,
+        tanggal_pemeriksaan: new Date(),
+        lingkar_kepala: +req.body.lingkar_kepala,
+        tinggi: +req.body.tinggi_badan,
+        berat_badan: +req.body.berat_badan,
+        Bayi_id: bayi.id
       }
       if(updateBayi.status_berat_badan !== 0 || updateBayi.status_lingkar_kepala !== 0 || updateBayi.status_tinggi !== 0) {
         if(!bayi.status_kasus) {
@@ -106,7 +123,7 @@ class PerkembanganController {
           id: bayiId
         }
       })
-      res.status(201).json(newData)
+      res.status(200).json(data[1][0])
     } catch (error) {
       next(error)
     }

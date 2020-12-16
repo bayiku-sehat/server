@@ -10,6 +10,7 @@
     "username": "postgres",
     "password": "123",
     "database": "bayiku-sehat-test",
+
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
