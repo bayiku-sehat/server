@@ -56,26 +56,27 @@ module.exports = (sequelize, DataTypes) => {
         // beforeValidate(user) {
         //   user.password = makeHash(user.password);
         // },
-        beforeUpdate(user) {
-          user.password = makeHash(user.password);
-        },
+        // beforeUpdate(user) {
+        //   console.log("before update");
+        //   user.password = makeHash(user.password);
+        // },
       },
       sequelize,
       modelName: "User",
     }
   );
 
-  User.beforeBulkCreate(users => {
-    users.map(user => {
-      let hash = makeHash(user.password);
-      user.password = hash;
-      user.username = user.username.toLowerCase();
+  // User.beforeBulkCreate(users => {
+  //   users.map(user => {
+  //     let hash = makeHash(user.password);
+  //     user.password = hash;
+  //     user.username = user.username.toLowerCase();
 
-      if (!user.foto) {
-        user.foto = `https://avatars.dicebear.com/api/initials/${user.username}.svg`;
-      }
-    });
-  });
+  //     if (!user.foto) {
+  //       user.foto = `https://avatars.dicebear.com/api/initials/${user.username}.svg`;
+  //     }
+  //   });
+  // });
 
   User.beforeFind(options => {
     if (options.where && options.where.username) {

@@ -56,11 +56,11 @@ class UserController {
       const data = await User.create(params);
       res.status(201).json(data);
     } catch (error) {
-      console.log(error, "iiiiiii");
       next(error);
     }
   }
   static async editUser(req, res, next) {
+    console.log("masuk edit User");
     try {
       let params = {
         nama: req.body.nama,
@@ -74,7 +74,7 @@ class UserController {
       };
       const data = await User.update(params, {
         where: {
-          id: req.params.user_id,
+          id: req.params.userId,
         },
         returning: true,
       });
@@ -87,13 +87,13 @@ class UserController {
     try {
       const deleteUser = await User.destroy({
         where: {
-          id: req.params.user_id,
+          id: req.params.userId,
         },
       });
       if (deleteUser == 1) {
         res.status(200).json({ msg: "data has been delete." });
       } else {
-        res.status(400).json({ msg: "data not found." });
+        res.status(404).json({ msg: "data not found." });
       }
     } catch (error) {
       next(error);
@@ -106,9 +106,11 @@ class UserController {
         password: req.body.password,
       };
       if (account.username === "" || account.password === "") {
-        res
-          .status(400)
-          .json({ msg: "you should input something to the field" });
+        throw {
+          name: "Bad Request",
+          message: "you should input something to the field",
+          status: 400,
+        };
       }
       const user = await User.findOne({
         where: {
@@ -132,13 +134,19 @@ class UserController {
     }
   }
   static async showDetail(req, res, next) {
+    console.log("masuk sini show detail, 137");
     res.status(200).json(req.userData);
   }
   static async userGetBayi(req, res, next) {
-    const bayiId = req.params.bayiId;
+    console.log("masuk userGetBayi line 141");
+    const bayiId = +req.params.bayiId;
     try {
       if (req.userData.role !== "Dokter") {
-        res.status(403).json({ msg: "Anda tidak berhak menangani pasien." });
+        throw {
+          name: "Unauthorized",
+          status: 401,
+          message: "Anda tidak berhak menangani pasien.",
+        };
       } else {
         const getBayi = await Bayi.findByPk(bayiId);
         const data = {

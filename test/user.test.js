@@ -1,10 +1,11 @@
 const request = require("supertest");
-const { response, use } = require("../app");
+const { response, use, set } = require("../app");
 const app = require("../app");
 const { User, Bayi, Perkembangan } = require("../models/index");
 const { sequelize } = require("../models");
 const { queryInterface } = sequelize;
 const { signToken } = require("../helpers/jwt");
+
 let id;
 let access_token;
 
@@ -253,64 +254,173 @@ describe("User Routes Test", () => {
             done();
           });
       });
-      //   describe("PUT / user", () => {
-      //     beforeAll(done => {
-      //       User.create(userData)
-      //         .then(() => {
-      //           console.log("yayayya");
-      //           return User.findOne({
-      //             where: {
-      //               username: "ajeng",
-      //             },
-      //           });
-      //         })
-      //         .then(user => {
-      //           id = user.id;
-      //           console.log(id, "id", user);
-      //           access_token = signToken({
-      //             id: user.id,
-      //             username: user.username,
-      //             role: user.role,
-      //           });
-      //           console.log(access_token, "hjhjhjhjh");
-      //           done();
-      //         })
-      //         .catch(err => {
-      //           done(err);
-      //         });
-      //     });
-      //     afterAll(done => {
-      //       queryInterface
-      //         .bulkDelete("Users", {})
-      //         .then(() => done())
-      //         .catch(err => done(err));
-      //     });
-      //     test("sukses edit", done => {
-      //       request(app)
-      //         .put(`/user/${id}`)
-      //         // .set("access_token", access_token)
-      //         .send({
-      //           username: "ajengputri",
-      //           password: "ajeng",
-      //           nama: "Fitri",
-      //           alamat: "Jakarta",
-      //           usia: 25,
-      //           no_hp: 685212345,
-      //           jenis_kelamin: "perempuan",
-      //           role: "Dokter",
-      //         })
-      //         .then(response => {
-      //           const { body, status } = response;
-      //           console.log(access_token);
-      //           //expect(status).toBe(200);
-      //           expect(response).toHaveProperty("body", expect.any(Object));
-      //           done();
-      //         })
-      //         .catch(err => {
-      //           done(err);
-      //         });
-      //     });
-      //   });
+      test("400 Failed login - should return access_token", done => {
+        request(app)
+          .post("/login")
+          .send({
+            username: "",
+            password: "",
+          })
+          .then(response => {
+            const { body, status } = response;
+            expect(status).toBe(400);
+            expect(body).toHaveProperty(
+              "message",
+              "you should input something to the field"
+            );
+            done();
+          });
+      });
     });
   });
+});
+
+describe(" route /user/", () => {
+  beforeAll(done => {
+    return User.create({
+      username: "ajengputri",
+      password: "ajeng",
+      nama: "Fitri",
+      alamat: "Jakarta",
+      usia: 25,
+      no_hp: 685212345,
+      jenis_kelamin: "perempuan",
+      role: "Dokter",
+    })
+      .then(data => {
+        console.log("creating sukses line 273", data);
+        return User.findOne({
+          where: {
+            username: "ajengputri",
+          },
+        });
+      })
+      .then(user => {
+        access_token = signToken({
+          id: user.id,
+          username: user.username,
+          role: user.role,
+        });
+        id = +user.id;
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+  afterAll(done => {
+    queryInterface
+      .bulkDelete("Users", {})
+      .then(() => done())
+      .catch(err => done(err));
+  });
+  test("fail edit no token", done => {
+    request(app)
+      .put("/user/" + id)
+      //   .set("access_token", access_token)
+      .send({
+        username: "ajengputri",
+        password: "ajeng",
+        nama: "Fitri",
+        alamat: "Jakarta",
+        usia: 25,
+        no_hp: 685212345,
+        jenis_kelamin: "perempuan",
+        role: "Dokter",
+      })
+      .then(response => {
+        const { body, status } = response;
+        expect(status).toBe(401);
+        expect(body).toHaveProperty(
+          "message",
+          "jwt must be provideduser unauthenticated"
+        );
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+  test("sukses edit", done => {
+    request(app)
+      .put("/user/" + id)
+      .set("access_token", access_token)
+      .send({
+        username: "ajengputri",
+        password: "ajeng",
+        nama: "Fitri",
+        alamat: "Jakarta",
+        usia: 25,
+        no_hp: 685212345,
+        jenis_kelamin: "perempuan",
+        role: "Dokter",
+      })
+      .then(response => {
+        const { body, status } = response;
+        expect(status).toBe(200);
+        expect(response).toHaveProperty("body", expect.any(Object));
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+  test("sukses delete", done => {
+    request(app)
+      .delete("/user/" + id)
+      .set("access_token", access_token)
+      .then(response => {
+        const { body, status } = response;
+        expect(status).toBe(200);
+        expect(body).toHaveProperty("msg", "data has been delete.");
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+  test("delete not found", done => {
+    request(app)
+      .delete("/user/" + id + 1)
+      .set("access_token", access_token)
+      .then(response => {
+        const { body, status } = response;
+        expect(status).toBe(404);
+        expect(body).toHaveProperty("msg", "data not found.");
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+  test("show detail", done => {
+    request(app)
+      .get("/user-detail")
+      .set("access_token", access_token)
+      .then(response => {
+        const { body, status } = response;
+        expect(status).toBe(200);
+        expect(response).toHaveProperty("body", expect.any(Object));
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+  //   test("user bayi, fail role bukan dokter", done => {
+  //     request(app)
+  //       .post("/user/bayi/2")
+  //       .set("access_token", access_token)
+  //       .send({
+  //         BayiId: 1,
+  //       })
+  //       .then(response => {
+  //         expect(status).toBe(401);
+  //         expect(response).toHaveProperty("body", expect.any(Object));
+  //         done();
+  //       })
+  //       .catch(err => {
+  //         done(err);
+  //       });
+  //   });
 });
